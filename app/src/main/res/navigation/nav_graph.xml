@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_navigation"
+    app:startDestination="@id/searchRecipesFragment">
+
+    <fragment
+        android:id="@+id/randomRecipesFragment"
+        android:name="com.juanimozo.recipesrandomizer.presentation.random_recipes.RandomRecipesFragment"
+        android:label="Random Recipes"
+        tools:layout="@layout/fragment_random_recipes" />
+    <fragment
+        android:id="@+id/searchRecipesFragment"
+        android:name="com.juanimozo.recipesrandomizer.presentation.search_recipe.SearchRecipesFragment"
+        android:label="Search Recipes"
+        tools:layout="@layout/fragment_search_recipes" />
+    <fragment
+        android:id="@+id/savedRecipesFragment"
+        android:name="com.juanimozo.recipesrandomizer.presentation.saved_recipes.SavedRecipesFragment"
+        android:label="Saved Recipes"
+        tools:layout="@layout/fragment_saved_recipes" />
+    <fragment
+        android:id="@+id/recipeFragment"
+        android:name="com.juanimozo.recipesrandomizer.presentation.RecipeFragment"
+        android:label="Recipe"
+        tools:layout="@layout/fragment_recipe" />
+</navigation>

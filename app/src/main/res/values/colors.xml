@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+
+<!-- Vintage Palette -->
+    <color name="white">#FFF4F6FF</color>
+    <color name="background_white">#DBDCDD</color>
+
+    <color name="yellow">#FFFFCB74</color>
+    <color name="dark_yellow">#E1880F</color>
+
+    <color name="salmon">#FFEA907A</color>
+    <color name="light_salmon">#FFEA907A</color>
+    <color name="dark_salmon">#AC6A5A</color>
+
+    <color name="green_blue">#FF4F8A8B</color>
+    <color name="light_green_blue">#C1F5F6</color>
+    <color name="navy">#FF464D5C</color>
+
+    <color name="gray">#8F8F8F</color>
+    <color name="dark_gray">#4E4E4E</color>
+    <color name="black">#FF000000</color>
+
+</resources>

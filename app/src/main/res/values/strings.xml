@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Recipes Randomizer</string>
+
+    <string name="hello_blank_fragment">hallo</string>
+
+    <!-- random_recipes.xml -->
+    <string name="generate_title_1">Generate random</string>
+    <string name="generate_title_2">recipes</string>
+    <string name="generate_description">Bring a list of 10 random recipes</string>
+    <string name="generate_button">Generate</string>
+
+    <!-- bottom_nav.xml -->
+    <string name="random_recipes_fragment_title">Random</string>
+    <string name="search_recipes_fragment_title">Search</string>
+    <string name="favorite_recipes_fragment_title">Favorites</string>
+
+</resources>

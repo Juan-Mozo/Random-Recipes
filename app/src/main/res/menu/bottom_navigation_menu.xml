@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/randomRecipesFragment"
+        android:icon="@drawable/dice"
+        android:title="@string/random_recipes_fragment_title"/>
+
+    <item
+        android:id="@+id/searchRecipesFragment"
+        android:icon="@drawable/search"
+        android:title="@string/search_recipes_fragment_title"/>
+
+    <item
+        android:id="@+id/savedRecipesFragment"
+        android:icon="@drawable/favorite"
+        android:title="@string/favorite_recipes_fragment_title"/>
+
+</menu>
