@@ -3,6 +3,7 @@ package com.juanimozo.recipesrandomizer.di
 import com.juanimozo.recipesrandomizer.data.remote.SpoonacularApi
 import com.juanimozo.recipesrandomizer.data.repository.RecipesRepositoryImpl
 import com.juanimozo.recipesrandomizer.domain.repository.RecipesRepository
+import com.juanimozo.recipesrandomizer.domain.use_case.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,6 +32,17 @@ object RecipesRandomizerModule {
         api: SpoonacularApi
     ): RecipesRepository {
         return RecipesRepositoryImpl(api)
+    }
+    
+    @Provides
+    @Singleton
+    fun provideRecipeUseCases(repository: RecipesRepository): RecipeUseCases {
+        return RecipeUseCases(
+            getRandomRecipesUseCase = GetRandomRecipesUseCase(repository),
+            getRecipeInfoUseCase = GetRecipeInfoUseCase(repository),
+            searchRecipeUseCase = SearchRecipeUseCase(repository),
+            getSimilarRecipesUseCase = GetSimilarRecipesUseCase(repository)
+        )
     }
 
 }

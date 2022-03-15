@@ -50,15 +50,16 @@ data class RecipeInformationDto(
             instructions = instructions,
             servings = servings,
             readyInMinutes = readyInMinutes,
-            cuisines = cuisines,
+            // cuisines = cuisines,
+            extendedIngredients = null,
             dishType = dishTypes,
             cheap = cheap,
             vegan = vegan,
             vegetarian = vegetarian,
             glutenFree = glutenFree,
             healthScore = healthScore,
-            pairedWines = winePairing.pairedWines,
-            pairedWineText = winePairing.pairingText
+            // pairedWines = winePairing.pairedWines,
+            // pairedWineText = winePairing.pairingText
         )
     }
 }

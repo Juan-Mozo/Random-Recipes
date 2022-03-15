@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Padding -->
+    <dimen name="small_padding">8dp</dimen>
+    <dimen name="midsize_padding">16dp</dimen>
+    <dimen name="large_padding">32dp</dimen>
+    <dimen name="xlarge_padding">44dp</dimen>
+
     <!-- TextView -->
     <dimen name="h1">25sp</dimen>
     <dimen name="subtitle_1">18sp</dimen>
+    <dimen name="paragraph">16sp</dimen>
+
+    <!-- ProgressBar -->
+    <dimen name="pb_size">70dp</dimen>
+
+    <!-- Recipe Item -->
+    <dimen name="item_height">230dp</dimen>
 
 </resources>

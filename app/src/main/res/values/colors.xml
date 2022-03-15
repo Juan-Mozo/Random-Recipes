@@ -14,14 +14,19 @@
     <color name="dark_yellow">#E1880F</color>
 
     <color name="salmon">#FFEA907A</color>
-    <color name="light_salmon">#FFEA907A</color>
+    <color name="terracotta_salmon">#D49B7E</color>
+    <color name="light_salmon">#E6C3BA</color>
     <color name="dark_salmon">#AC6A5A</color>
 
+    <color name="light_green_blue">#C7E4E4</color>
+    <color name="terracotta_blue">#989e8b</color>
+    <color name="light_navy">#5E677A</color>
     <color name="green_blue">#FF4F8A8B</color>
-    <color name="light_green_blue">#C1F5F6</color>
     <color name="navy">#FF464D5C</color>
+    <color name="dark_blue">#32333A</color>
 
-    <color name="gray">#8F8F8F</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="gray">#B5B5B5</color>
     <color name="dark_gray">#4E4E4E</color>
     <color name="black">#FF000000</color>
 

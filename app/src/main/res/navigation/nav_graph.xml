@@ -3,13 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_navigation"
-    app:startDestination="@id/searchRecipesFragment">
+    app:startDestination="@id/randomRecipesFragment">
 
     <fragment
         android:id="@+id/randomRecipesFragment"
         android:name="com.juanimozo.recipesrandomizer.presentation.random_recipes.RandomRecipesFragment"
         android:label="Random Recipes"
-        tools:layout="@layout/fragment_random_recipes" />
+        tools:layout="@layout/fragment_random_recipes" >
+        <action
+            android:id="@+id/action_randomRecipesFragment_to_randomRecipesRVFragment"
+            app:destination="@id/randomRecipesRVFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchRecipesFragment"
         android:name="com.juanimozo.recipesrandomizer.presentation.search_recipe.SearchRecipesFragment"
@@ -24,5 +28,40 @@
         android:id="@+id/recipeFragment"
         android:name="com.juanimozo.recipesrandomizer.presentation.RecipeFragment"
         android:label="Recipe"
-        tools:layout="@layout/fragment_recipe" />
+        tools:layout="@layout/fragment_recipe" >
+    </fragment>
+    <fragment
+        android:id="@+id/randomRecipesRVFragment"
+        android:name="com.juanimozo.recipesrandomizer.presentation.random_recipes.RandomRecipesRVFragment"
+        android:label="fragment_random_recipes_r_v"
+        tools:layout="@layout/fragment_random_recipes_r_v" >
+        <action
+            android:id="@+id/action_randomRecipesRVFragment_to_recipeDetails"
+            app:destination="@id/recipeDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/recipeDetails"
+        android:name="com.juanimozo.recipesrandomizer.presentation.recipe_details.RecipeDetails"
+        android:label="fragment_recipe_details"
+        tools:layout="@layout/fragment_recipe_details">
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="image"
+            app:argType="string"
+            app:nullable="true"/>
+        <argument
+            android:name="servings"
+            app:argType="integer" />
+        <argument
+            android:name="readyIn"
+            app:argType="integer" />
+        <argument
+            android:name="instructions"
+            app:argType="string" />
+        <argument
+            android:name="recipe"
+            app:argType="com.juanimozo.recipesrandomizer.domain.model.Recipe" />
+    </fragment>
 </navigation>

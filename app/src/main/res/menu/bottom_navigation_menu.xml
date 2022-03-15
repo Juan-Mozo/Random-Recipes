@@ -8,12 +8,12 @@
 
     <item
         android:id="@+id/searchRecipesFragment"
-        android:icon="@drawable/search"
+        android:icon="@drawable/loupe"
         android:title="@string/search_recipes_fragment_title"/>
 
     <item
         android:id="@+id/savedRecipesFragment"
-        android:icon="@drawable/favorite"
+        android:icon="@drawable/heart"
         android:title="@string/favorite_recipes_fragment_title"/>
 
 </menu>

@@ -1,6 +1,6 @@
 package com.juanimozo.recipesrandomizer.data.remote.dto.random_recipes
 
-import com.juanimozo.recipesrandomizer.domain.model.RandomRecipe
+import com.juanimozo.recipesrandomizer.domain.model.Recipe
 
 data class Recipe(
     val aggregateLikes: Int,
@@ -39,21 +39,24 @@ data class Recipe(
     val veryPopular: Boolean,
     val weightWatcherSmartPoints: Int
 ) {
-    fun toRecipe(): RandomRecipe {
-        return RandomRecipe(
+    fun toRecipe(): Recipe {
+        return Recipe(
             id = id,
             title = title,
             image = image,
             instructions = instructions,
             servings = servings,
             readyInMinutes = readyInMinutes,
-            cuisines = cuisines,
+            // cuisines = cuisines,
+            extendedIngredients = extendedIngredients,
             dishType = dishTypes,
             cheap = cheap,
             vegan = vegan,
             vegetarian = vegetarian,
             glutenFree = glutenFree,
-            healthScore = healthScore
+            healthScore = healthScore,
+            // pairedWines = null,
+            // pairedWineText = null
         )
     }
 }

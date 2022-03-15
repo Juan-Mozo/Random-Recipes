@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Text Styles -->
+        <!-- HEADLINE -->
+    <style name="H1" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/dark_blue</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:gravity">center</item>
+        <item name="fontFamily">@font/montserrat_semi_bold</item>
+    </style>
+        <!-- SUBTITLE -->
+    <style name="S1" parent="H1">
+        <item name="android:textSize">18sp</item>
+        <item name="android:gravity">start</item>
+        <item name="fontFamily">@font/montserrat_medium</item>
+    </style>
+        <!-- PARAGRAPH -->
+    <style name="P1" parent="S1">
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/quicksand_regular</item>
+    </style>
+
+</resources>

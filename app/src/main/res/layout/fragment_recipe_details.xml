@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.recipe_details.RecipeDetails">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gradient_recipe_background">
+
+        <ImageView
+            android:id="@+id/recipeImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/image_not_found"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="middle"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:gravity="center"
+            android:maxLines="3"
+            android:text="@string/nn"
+            android:textColor="@color/black"
+            android:textSize="@dimen/h1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recipeImage"
+            tools:text="Korean Extra Crispy Fried Chicken w Sweet Spicy Glaze" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/servingCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/terracotta_blue"
+            app:cardCornerRadius="15dp"
+            app:contentPadding="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleTextView">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/servingsTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@string/servings"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/subtitle_1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/servingsAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="@string/nn"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/subtitle_1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/servingsTitle"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/readyInCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/terracotta_blue"
+            app:cardCornerRadius="15dp"
+            app:contentPadding="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/servingCard">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/readyInText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@string/ready_in"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/subtitle_1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/readyInAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="@string/nn"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/subtitle_1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/readyInText"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="@string/minutes"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/subtitle_1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/readyInAmount"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/descriptionText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="TextView"
+            android:textAppearance="@style/P1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/servingCard"
+            tools:text="This beverage has 189 calories, 1g of protein, and , 0g of fat per serving. For $2.23 per serving covers 3% of your daily requirements of vitamins and minerals" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ingredientsRV"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/ingredientsText"
+            app:layout_constraintStart_toStartOf="@+id/ingredientsText"
+            app:layout_constraintTop_toBottomOf="@+id/ingredientsText" />
+
+        <TextView
+            android:id="@+id/instructionsText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/nn"
+            android:textAppearance="@style/P1"
+            android:textColor="@color/black"
+            android:textSize="@dimen/paragraph"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ingredientsRV"
+            tools:text="1. Cut and discard the end tip of each chiken wing. Cut remaining pieces in half at the joint to create 2 pieces. Rinse pieces under cold water and set to dry for at least 10 minutes." />
+
+        <TextView
+            android:id="@+id/cheapText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/cheap"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/instructionsText" />
+
+        <ImageView
+            android:id="@+id/cheapIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/loupe"
+            app:layout_constraintBottom_toBottomOf="@+id/cheapText"
+            app:layout_constraintStart_toEndOf="@+id/cheapText"
+            app:layout_constraintTop_toTopOf="@+id/cheapText"
+            app:srcCompat="@drawable/cheap" />
+
+        <TextView
+            android:id="@+id/ingredientsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/ingredients"
+            android:textAppearance="@style/S1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descriptionText" />
+
+        <TextView
+            android:id="@+id/veganText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/vegan"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/cheapText"
+            app:layout_constraintTop_toBottomOf="@+id/cheapText" />
+
+        <ImageView
+            android:id="@+id/veganIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/loupe"
+            app:layout_constraintBottom_toBottomOf="@+id/veganText"
+            app:layout_constraintStart_toEndOf="@+id/veganText"
+            app:layout_constraintTop_toTopOf="@+id/veganText"
+            app:srcCompat="@drawable/vegan" />
+
+        <TextView
+            android:id="@+id/vegetarianText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="@string/vegetarian"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/vegetarianIcon"
+            app:layout_constraintTop_toTopOf="@+id/cheapText" />
+
+        <ImageView
+            android:id="@+id/vegetarianIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/loupe"
+            app:layout_constraintBottom_toBottomOf="@+id/vegetarianText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/vegetarianText"
+            app:srcCompat="@drawable/no_meat" />
+
+        <TextView
+            android:id="@+id/glutenFreeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/gluten_free"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/vegetarianText"
+            app:layout_constraintTop_toBottomOf="@+id/vegetarianText" />
+
+        <ImageView
+            android:id="@+id/glutenFreeIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/loupe"
+            app:layout_constraintBottom_toBottomOf="@+id/glutenFreeText"
+            app:layout_constraintStart_toEndOf="@+id/glutenFreeText"
+            app:layout_constraintTop_toTopOf="@+id/glutenFreeText"
+            app:srcCompat="@drawable/gluten_free" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.core.widget.NestedScrollView>

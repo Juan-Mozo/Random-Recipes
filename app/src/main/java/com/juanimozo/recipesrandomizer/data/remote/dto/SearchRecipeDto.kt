@@ -9,6 +9,8 @@ data class SearchRecipeDto(
     val results: List<Result>,
     val totalResults: Int
 ) {
+    // ToDo:: -DTO- *1* / Priority: HIGH
+    // Description: SACAR ESTO
     fun toRecipeEntity(): SearchResult {
         return SearchResult(
             id = results.map { it.id },

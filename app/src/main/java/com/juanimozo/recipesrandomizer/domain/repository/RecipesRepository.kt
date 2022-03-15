@@ -8,7 +8,7 @@ interface RecipesRepository {
 
     fun getRecipeInfo(id: Int): Flow<Resource<Recipe>>
 
-    fun getRandomRecipes(): Flow<Resource<List<RandomRecipe>>>
+    fun getRandomRecipes(): Flow<Resource<List<Recipe>>>
 
     fun searchRecipe(query: String, cuisine: String, diet: String): Flow<Resource<SearchResult>>
 

@@ -3,6 +3,10 @@
 
     <string name="hello_blank_fragment">hallo</string>
 
+    <!-- Util -->
+    <string name="image_not_found">Image Not Found</string>
+    <string name="nn">N/N</string>
+
     <!-- random_recipes.xml -->
     <string name="generate_title_1">Generate random</string>
     <string name="generate_title_2">recipes</string>
@@ -13,5 +17,17 @@
     <string name="random_recipes_fragment_title">Random</string>
     <string name="search_recipes_fragment_title">Search</string>
     <string name="favorite_recipes_fragment_title">Favorites</string>
+
+    <!-- recipe_details.xml -->
+    <string name="servings">Servings:</string>
+    <string name="ready_in">Ready in:</string>
+    <string name="minutes">Min</string>
+    <string name="cuisine">Cuisine:</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="dish">Dish:</string>
+    <string name="cheap">Cheap:</string>
+    <string name="vegan">Vegan:</string>
+    <string name="vegetarian">Vegetarian:</string>
+    <string name="gluten_free">Gluten Free:</string>
 
 </resources>

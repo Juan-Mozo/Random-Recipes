@@ -6,8 +6,9 @@ import com.juanimozo.recipesrandomizer.domain.model.*
 import com.juanimozo.recipesrandomizer.domain.repository.RecipesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
-class RecipesRepositoryImpl(
+class RecipesRepositoryImpl @Inject constructor(
     private val api: SpoonacularApi
 ): RecipesRepository {
 
@@ -19,7 +20,7 @@ class RecipesRepositoryImpl(
 
     }
 
-    override fun getRandomRecipes(): Flow<Resource<List<RandomRecipe>>> = flow {
+    override fun getRandomRecipes(): Flow<Resource<List<Recipe>>> = flow {
         emit(Resource.Loading())
 
         val randomRecipes = api.getRandomRecipes().recipes.map { it.toRecipe() }
