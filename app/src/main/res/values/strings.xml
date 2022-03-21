@@ -24,10 +24,13 @@
     <string name="minutes">Min</string>
     <string name="cuisine">Cuisine:</string>
     <string name="ingredients">Ingredients</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
     <string name="dish">Dish:</string>
-    <string name="cheap">Cheap:</string>
-    <string name="vegan">Vegan:</string>
-    <string name="vegetarian">Vegetarian:</string>
-    <string name="gluten_free">Gluten Free:</string>
+    <string name="cheap">Cheap: </string>
+    <string name="vegan">Vegan: </string>
+    <string name="vegetarian">Vegetarian: </string>
+    <string name="gluten_free">Gluten Free: </string>
+    <string name="similarRecipes">Similar Recipes</string>
 
 </resources>

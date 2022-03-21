@@ -41,27 +41,14 @@
     </fragment>
     <fragment
         android:id="@+id/recipeDetails"
-        android:name="com.juanimozo.recipesrandomizer.presentation.recipe_details.RecipeDetails"
+        android:name="com.juanimozo.recipesrandomizer.presentation.recipe_details.RecipeDetailsFragment"
         android:label="fragment_recipe_details"
         tools:layout="@layout/fragment_recipe_details">
         <argument
-            android:name="title"
-            app:argType="string" />
-        <argument
-            android:name="image"
-            app:argType="string"
-            app:nullable="true"/>
-        <argument
-            android:name="servings"
-            app:argType="integer" />
-        <argument
-            android:name="readyIn"
-            app:argType="integer" />
-        <argument
-            android:name="instructions"
-            app:argType="string" />
-        <argument
             android:name="recipe"
             app:argType="com.juanimozo.recipesrandomizer.domain.model.Recipe" />
+        <action
+            android:id="@+id/action_recipeDetails_self"
+            app:destination="@id/recipeDetails" />
     </fragment>
 </navigation>

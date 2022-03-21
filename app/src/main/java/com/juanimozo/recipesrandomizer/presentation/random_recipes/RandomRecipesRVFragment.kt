@@ -32,15 +32,8 @@ class RandomRecipesRVFragment : Fragment() {
 
         val recyclerViewAdapter = RandomRecipesAdapter { recipe ->
 
-            // Navigate to RecipeDetails
+            // Navigate to RecipeDetailsFragment
             val action = RandomRecipesRVFragmentDirections.actionRandomRecipesRVFragmentToRecipeDetails(
-                // ToDo:: -RVFragment- *1* / Priority: Low
-                // Description: Sacar una vez integrado recipe
-                title = recipe.title ?: "",
-                image = recipe.image ?: "",
-                instructions = recipe.instructions ?: "",
-                readyIn = recipe.readyInMinutes ?: 0,
-                servings = recipe.servings ?: 0,
                 recipe = recipe
             )
             findNavController().navigate(action)

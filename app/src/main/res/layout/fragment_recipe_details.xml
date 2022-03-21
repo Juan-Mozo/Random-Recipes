@@ -5,12 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.recipe_details.RecipeDetails">
+    tools:context=".presentation.recipe_details.RecipeDetailsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/gradient_recipe_background">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/recipeImage"
@@ -155,12 +154,23 @@
             app:layout_constraintTop_toBottomOf="@+id/servingCard"
             tools:text="This beverage has 189 calories, 1g of protein, and , 0g of fat per serving. For $2.23 per serving covers 3% of your daily requirements of vitamins and minerals" />
 
+        <TextView
+            android:id="@+id/ingredientsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/ingredients"
+            android:textAppearance="@style/S1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descriptionText" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ingredientsRV"
             android:layout_width="300dp"
             android:layout_height="200dp"
             android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/ingredientsText"
+            android:elevation="1dp"
             app:layout_constraintStart_toStartOf="@+id/ingredientsText"
             app:layout_constraintTop_toBottomOf="@+id/ingredientsText" />
 
@@ -185,53 +195,44 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
             android:text="@string/cheap"
             android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/instructionsText" />
+            android:textAppearance="@style/P1"
+            app:layout_constraintBottom_toBottomOf="@+id/cheapIcon"
+            app:layout_constraintStart_toEndOf="@+id/cheapIcon"
+            app:layout_constraintTop_toTopOf="@+id/cheapIcon" />
 
         <ImageView
             android:id="@+id/cheapIcon"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="16dp"
-            android:src="@drawable/loupe"
-            app:layout_constraintBottom_toBottomOf="@+id/cheapText"
-            app:layout_constraintStart_toEndOf="@+id/cheapText"
-            app:layout_constraintTop_toTopOf="@+id/cheapText"
-            app:srcCompat="@drawable/cheap" />
-
-        <TextView
-            android:id="@+id/ingredientsText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/ingredients"
-            android:textAppearance="@style/S1"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="13dp"
+            android:src="@drawable/cheap"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/descriptionText" />
+            app:layout_constraintTop_toBottomOf="@+id/instructionsText"
+            app:srcCompat="@drawable/cheap" />
 
         <TextView
             android:id="@+id/veganText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginStart="16dp"
             android:text="@string/vegan"
             android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="@+id/cheapText"
-            app:layout_constraintTop_toBottomOf="@+id/cheapText" />
+            android:textAppearance="@style/P1"
+            app:layout_constraintBottom_toBottomOf="@+id/veganIcon"
+            app:layout_constraintStart_toEndOf="@+id/veganIcon"
+            app:layout_constraintTop_toTopOf="@+id/veganIcon" />
 
         <ImageView
             android:id="@+id/veganIcon"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginStart="16dp"
-            android:src="@drawable/loupe"
-            app:layout_constraintBottom_toBottomOf="@+id/veganText"
-            app:layout_constraintStart_toEndOf="@+id/veganText"
-            app:layout_constraintTop_toTopOf="@+id/veganText"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/vegan"
+            app:layout_constraintStart_toStartOf="@+id/cheapIcon"
+            app:layout_constraintTop_toBottomOf="@+id/cheapIcon"
             app:srcCompat="@drawable/vegan" />
 
         <TextView
@@ -240,6 +241,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:text="@string/vegetarian"
+            android:textAppearance="@style/P1"
             android:textColor="@color/black"
             app:layout_constraintEnd_toStartOf="@+id/vegetarianIcon"
             app:layout_constraintTop_toTopOf="@+id/cheapText" />
@@ -249,7 +251,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginEnd="16dp"
-            android:src="@drawable/loupe"
+            android:src="@drawable/no_meat"
             app:layout_constraintBottom_toBottomOf="@+id/vegetarianText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/vegetarianText"
@@ -262,6 +264,7 @@
             android:layout_marginTop="12dp"
             android:text="@string/gluten_free"
             android:textColor="@color/black"
+            android:textAppearance="@style/P1"
             app:layout_constraintStart_toStartOf="@+id/vegetarianText"
             app:layout_constraintTop_toBottomOf="@+id/vegetarianText" />
 
@@ -270,11 +273,35 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="16dp"
-            android:src="@drawable/loupe"
+            android:src="@drawable/gluten_free"
             app:layout_constraintBottom_toBottomOf="@+id/glutenFreeText"
             app:layout_constraintStart_toEndOf="@+id/glutenFreeText"
             app:layout_constraintTop_toTopOf="@+id/glutenFreeText"
             app:srcCompat="@drawable/gluten_free" />
+
+        <TextView
+            android:id="@+id/similarRecipesText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:text="@string/similarRecipes"
+            android:textAppearance="@style/S1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/veganIcon" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/similarRecipesRV"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="100dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:scrollbars="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/similarRecipesText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
