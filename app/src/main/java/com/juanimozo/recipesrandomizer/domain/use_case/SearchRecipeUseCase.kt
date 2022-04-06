@@ -1,6 +1,7 @@
 package com.juanimozo.recipesrandomizer.domain.use_case
 
 import com.juanimozo.recipesrandomizer.core.util.Resource
+import com.juanimozo.recipesrandomizer.data.remote.dto.search_recipe.Result
 import com.juanimozo.recipesrandomizer.domain.model.SearchResult
 import com.juanimozo.recipesrandomizer.domain.repository.RecipesRepository
 import kotlinx.coroutines.flow.Flow
@@ -13,7 +14,7 @@ class SearchRecipeUseCase(
         query: String,
         cuisine: String,
         diet: String,
-    ): Flow<Resource<SearchResult>> {
+    ): Flow<Resource<List<Result>>> {
         if (query.isBlank()) {
             return flow {  }
         }

@@ -14,8 +14,6 @@ data class SimilarRecipesDtoItem(
         return SimilarResults(
             id = id,
             title = title,
-            // ToDo:: -DTO- *2* / Priority: HIGH
-            // Description: Fijarse si hay imagenes en la respuesta
             image = null,
             readyInMinutes = readyInMinutes,
         )

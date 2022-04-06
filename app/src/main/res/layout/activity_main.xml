@@ -35,6 +35,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/gradient_bottomnavbar"
+            app:itemHorizontalTranslationEnabled="true"
+            app:labelVisibilityMode="selected"
             app:menu="@menu/bottom_navigation_menu" />
     </androidx.cardview.widget.CardView>
 

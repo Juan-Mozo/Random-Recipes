@@ -12,6 +12,16 @@
     <dimen name="subtitle_1">18sp</dimen>
     <dimen name="paragraph">16sp</dimen>
 
+    <!-- recipe_details Icons -->
+    <dimen name="icon_size">40dp</dimen>
+
+    <!-- AppCompactButton -->
+    <dimen name="button_height">56dp</dimen>
+    <dimen name="button_width">160dp</dimen>
+
+    <!-- EditText -->
+    <dimen name="edit_text_height">48dp</dimen>
+
     <!-- ProgressBar -->
     <dimen name="pb_size">70dp</dimen>
 

@@ -18,18 +18,16 @@
         android:id="@+id/searchRecipesFragment"
         android:name="com.juanimozo.recipesrandomizer.presentation.search_recipe.SearchRecipesFragment"
         android:label="Search Recipes"
-        tools:layout="@layout/fragment_search_recipes" />
+        tools:layout="@layout/fragment_search_recipes" >
+        <action
+            android:id="@+id/action_searchRecipesFragment_to_searchRecipesRVFragment"
+            app:destination="@id/searchRecipesRVFragment" />
+    </fragment>
     <fragment
         android:id="@+id/savedRecipesFragment"
         android:name="com.juanimozo.recipesrandomizer.presentation.saved_recipes.SavedRecipesFragment"
         android:label="Saved Recipes"
         tools:layout="@layout/fragment_saved_recipes" />
-    <fragment
-        android:id="@+id/recipeFragment"
-        android:name="com.juanimozo.recipesrandomizer.presentation.RecipeFragment"
-        android:label="Recipe"
-        tools:layout="@layout/fragment_recipe" >
-    </fragment>
     <fragment
         android:id="@+id/randomRecipesRVFragment"
         android:name="com.juanimozo.recipesrandomizer.presentation.random_recipes.RandomRecipesRVFragment"
@@ -50,5 +48,23 @@
         <action
             android:id="@+id/action_recipeDetails_self"
             app:destination="@id/recipeDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchRecipesRVFragment"
+        android:name="com.juanimozo.recipesrandomizer.presentation.search_recipe.recycler_view.SearchRecipesRVFragment"
+        android:label="fragment_search_recipes_rv"
+        tools:layout="@layout/fragment_search_recipes_rv" >
+        <action
+            android:id="@+id/action_searchRecipesRVFragment_to_recipeDetails"
+            app:destination="@id/recipeDetails" />
+        <argument
+            android:name="query"
+            app:argType="string" />
+        <argument
+            android:name="cuisine"
+            app:argType="string" />
+        <argument
+            android:name="diet"
+            app:argType="string" />
     </fragment>
 </navigation>

@@ -1,19 +1,23 @@
 package com.juanimozo.recipesrandomizer.presentation.recipe_details
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.juanimozo.recipesrandomizer.R
 import com.juanimozo.recipesrandomizer.databinding.FragmentRecipeDetailsBinding
 import com.juanimozo.recipesrandomizer.presentation.util.getImage
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 
@@ -35,7 +39,7 @@ class RecipeDetailsFragment : Fragment() {
         _binding = FragmentRecipeDetailsBinding.inflate(inflater, container, false)
 
         // Bind recipe image
-        if(args.recipe.image != null) {
+        if(args.recipe.image != null && args.recipe.image!!.isNotEmpty()) {
             getImage(
                 url = args.recipe.image!!,
                 view = binding.recipeImage,
@@ -51,13 +55,13 @@ class RecipeDetailsFragment : Fragment() {
 
         // Set transparency icons
             // Cheap Icon
-        setTransparency(args.recipe.cheap, binding.cheapIcon)
+        setTransparency(args.recipe.cheap, binding.cheapIcon, binding.cheapTextBoolean)
             // Vegan Icon
-        setTransparency(args.recipe.vegan, binding.veganIcon)
+        setTransparency(args.recipe.vegan, binding.veganIcon, binding.veganTextBoolean)
             // Vegetarian Icon
-        setTransparency(args.recipe.vegetarian, binding.vegetarianIcon)
+        setTransparency(args.recipe.vegetarian, binding.vegetarianIcon, binding.vegetarianTextBoolean)
             // Gluten Free Icon
-        setTransparency(args.recipe.glutenFree, binding.glutenFreeIcon)
+        setTransparency(args.recipe.glutenFree, binding.glutenFreeIcon, binding.glutenFreeTextBoolean)
 
         // RecyclerView & Adapter Ingredients
         val rvIngredients = binding.ingredientsRV
@@ -68,7 +72,7 @@ class RecipeDetailsFragment : Fragment() {
 
         // RecyclerView & Adapter SimilarRecipes
         val rvSimilarRecipes = binding.similarRecipesRV
-        rvSimilarRecipes.layoutManager = LinearLayoutManager(requireContext())
+        rvSimilarRecipes.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         val rvSimilarRecipesAdapter = SimilarRecipesAdapter { recipe ->
             // Get the new recipe
             viewModel.getRecipeInformation(recipe.id)
@@ -90,12 +94,16 @@ class RecipeDetailsFragment : Fragment() {
         _binding = null
     }
 
-    fun setTransparency(
+    private fun setTransparency(
         value: Boolean,
-        iV: ImageView
+        // Icon
+        iV: ImageView,
+        // TextView with Yes or No
+        tV: TextView
     ) {
         if (!value) {
             iV.imageAlpha = 30
+            tV.text = getString(R.string.no)
         }
     }
 
@@ -110,10 +118,10 @@ class RecipeDetailsFragment : Fragment() {
 
     private fun observeNewRecipeState() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.newRecipe.collectLatest {
+            viewModel.newRecipe.collect {
                 // Load the new recipe selected from similar recipes
                 val action = RecipeDetailsFragmentDirections.actionRecipeDetailsSelf(
-                    recipe = it.recipe
+                    recipe = it
                 )
                 findNavController().navigate(action)
             }

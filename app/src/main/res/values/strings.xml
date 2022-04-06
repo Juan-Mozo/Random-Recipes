@@ -5,6 +5,7 @@
 
     <!-- Util -->
     <string name="image_not_found">Image Not Found</string>
+    <string name="text_is_blank">Enter a valid text</string>
     <string name="nn">N/N</string>
 
     <!-- random_recipes.xml -->
@@ -12,6 +13,53 @@
     <string name="generate_title_2">recipes</string>
     <string name="generate_description">Bring a list of 10 random recipes</string>
     <string name="generate_button">Generate</string>
+
+    <!-- search_recipes.xml -->
+    <string name="search_title">SEARCH RECIPE</string>
+    <string name="search_button">SEARCH</string>
+    <string name="search_subtitle">Search through hundreds of thousands of recipes using advanced filtering.</string>
+    <string name="search_edit_text">Search recipe…</string>
+    <string name="optional">Optional Filters</string>
+    <string name="cuisine_title">Cuisine</string>
+    <string name="cuisine_subtitle">Select a country from the list</string>
+    <string-array name="cuisine_array">
+        <item>None</item>
+        <item>African</item>
+        <item>American</item>
+        <item>British</item>
+        <item>Cajun</item>
+        <item>Caribbean</item>
+        <item>Chinese</item>
+        <item>Eastern European</item>
+        <item>European</item>
+        <item>French</item>
+        <item>German</item>
+        <item>Greek</item>
+        <item>Indian</item>
+        <item>Irish</item>
+        <item>Italian</item>
+        <item>Japanese</item>
+        <item>Jewish</item>
+        <item>Korean</item>
+        <item>Latin American</item>
+        <item>Mediterranean</item>
+        <item>Mexican</item>
+        <item>Middle Eastern</item>
+        <item>Nordic</item>
+        <item>Southern</item>
+        <item>Spanish</item>
+        <item>Thai</item>
+        <item>Vietnamese</item>
+    </string-array>
+    <string name="diet_title">Diet</string>
+    <string name="diet_subtitle">Select a diet from the list</string>
+    <string-array name="diet_array">
+        <item>None</item>
+        <item>Gluten Free</item>
+        <item>Vegetarian</item>
+        <item>Vegan</item>
+    </string-array>
+
 
     <!-- bottom_nav.xml -->
     <string name="random_recipes_fragment_title">Random</string>
