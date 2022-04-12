@@ -52,6 +52,7 @@ dependencies {
     def okhttp3Version = "5.0.0-alpha.2"
     def navVersion = "2.4.1"
     def roomVersion = "2.3.0"
+    def lottieVersion = "5.0.3"
 
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
@@ -63,6 +64,9 @@ dependencies {
     // Dagger - Hilt
     implementation "com.google.dagger:hilt-android:2.38.1"
     kapt "com.google.dagger:hilt-android-compiler:2.38.1"
+
+    // Lottie
+    implementation "com.airbnb.android:lottie:$lottieVersion"
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$daggerVersion"

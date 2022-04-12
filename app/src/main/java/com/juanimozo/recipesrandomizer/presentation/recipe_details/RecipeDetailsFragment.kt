@@ -52,6 +52,7 @@ class RecipeDetailsFragment : Fragment() {
         binding.servingsAmount.text = args.recipe.servings.toString()
         binding.readyInAmount.text = args.recipe.readyInMinutes.toString()
         binding.instructionsText.text = args.recipe.instructions
+        binding.pairedWineText.text = args.recipe.pairedWineText
 
         // Set transparency icons
             // Cheap Icon

@@ -3,13 +3,13 @@ package com.juanimozo.recipesrandomizer.presentation.recipe_details
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.juanimozo.recipesrandomizer.R
-import com.juanimozo.recipesrandomizer.data.remote.dto.random_recipes.ExtendedIngredient
+import com.juanimozo.recipesrandomizer.data.remote.dto.recipe_information.ExtendedIngredient
+import com.juanimozo.recipesrandomizer.domain.model.extended_ingredient.ExtendedIngredientModel
 
 class RecipeIngredientListViewHolder(
     view: View
@@ -17,7 +17,7 @@ class RecipeIngredientListViewHolder(
 
     private val ingredient = view.findViewById<TextView>(R.id.ingredient)
 
-    fun bind(item: ExtendedIngredient) {
+    fun bind(item: ExtendedIngredientModel) {
         val ingAmount = item.measures.metric.amount
         val ingUnit = item.measures.metric.unitShort
         val ingTitle = item.originalName
@@ -26,15 +26,15 @@ class RecipeIngredientListViewHolder(
 
 }
 
-class RecipeIngredientsAdapter: ListAdapter<ExtendedIngredient, RecipeIngredientListViewHolder>(DIFF_CONFIG) {
+class RecipeIngredientsAdapter: ListAdapter<ExtendedIngredientModel, RecipeIngredientListViewHolder>(DIFF_CONFIG) {
 
     companion object {
-        val DIFF_CONFIG = object : DiffUtil.ItemCallback<ExtendedIngredient>() {
-            override fun areItemsTheSame(oldItem: ExtendedIngredient, newItem: ExtendedIngredient): Boolean {
+        val DIFF_CONFIG = object : DiffUtil.ItemCallback<ExtendedIngredientModel>() {
+            override fun areItemsTheSame(oldItem: ExtendedIngredientModel, newItem: ExtendedIngredientModel): Boolean {
                 return oldItem === newItem
             }
 
-            override fun areContentsTheSame(oldItem: ExtendedIngredient, newItem: ExtendedIngredient): Boolean {
+            override fun areContentsTheSame(oldItem: ExtendedIngredientModel, newItem: ExtendedIngredientModel): Boolean {
                 return oldItem == newItem
             }
 

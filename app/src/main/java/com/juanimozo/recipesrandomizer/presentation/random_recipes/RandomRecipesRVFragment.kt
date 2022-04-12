@@ -9,8 +9,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.juanimozo.recipesrandomizer.R
 import com.juanimozo.recipesrandomizer.databinding.FragmentRandomRecipesRVBinding
+import com.juanimozo.recipesrandomizer.presentation.util.SetAnimation
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
@@ -26,6 +29,9 @@ class RandomRecipesRVFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentRandomRecipesRVBinding.inflate(inflater, container, false)
+
+        // Start loading animation
+        SetAnimation().startAnimation(binding.loadingFoodAnimation, R.raw.loading_food)
 
         val recyclerView = binding.randomRecipesRv
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -55,9 +61,10 @@ class RandomRecipesRVFragment : Fragment() {
     private fun observeState(rvAdapter: RandomRecipesAdapter) {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.randomRecipesState.collect {
-                // Hide progressBar when isLoading = False
+                delay(2000)
+                // Stop and hide animation when isLoading = False
                 if (!it.isLoading) {
-                    binding.progressBar.visibility = View.GONE
+                    SetAnimation().finishAnimation(binding.loadingFoodAnimation)
                 }
                 // Submit new list to adapter
                 rvAdapter.submitList(it.recipes)

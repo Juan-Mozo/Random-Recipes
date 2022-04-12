@@ -1,7 +1,7 @@
 package com.juanimozo.recipesrandomizer.domain.model
 
 import android.os.Parcelable
-import com.juanimozo.recipesrandomizer.data.remote.dto.random_recipes.ExtendedIngredient
+import com.juanimozo.recipesrandomizer.domain.model.extended_ingredient.ExtendedIngredientModel
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -12,14 +12,11 @@ data class Recipe(
     val instructions: String,
     val servings: Int,
     val readyInMinutes: Int,
-    // val cuisines: List<Any>?,
-    val extendedIngredients: List<ExtendedIngredient>?,
-    val dishType: List<String>?,
+    val extendedIngredients: List<ExtendedIngredientModel>?,
     val cheap: Boolean,
     val vegan: Boolean,
     val vegetarian: Boolean,
     val glutenFree: Boolean,
     val healthScore: Double,
-    // val pairedWines: List<Any>?,
-    // val pairedWineText: String?
+    val pairedWineText: String?
 ): Parcelable

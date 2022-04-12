@@ -1,4 +1,4 @@
-package com.juanimozo.recipesrandomizer.data.remote.dto.recipe_information
+package com.juanimozo.recipesrandomizer.data.remote.dto.random_recipe
 
 import android.os.Parcelable
 import com.juanimozo.recipesrandomizer.domain.model.extended_ingredient.ExtendedIngredientModel

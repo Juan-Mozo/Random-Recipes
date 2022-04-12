@@ -5,6 +5,7 @@
 
     <!-- Util -->
     <string name="image_not_found">Image Not Found</string>
+    <string name="text_not_found">Not Found</string>
     <string name="text_is_blank">Enter a valid text</string>
     <string name="nn">N/N</string>
 
@@ -79,6 +80,7 @@
     <string name="vegan">Vegan: </string>
     <string name="vegetarian">Vegetarian: </string>
     <string name="gluten_free">Gluten Free: </string>
+    <string name="pairedWines">Paired Wines</string>
     <string name="similarRecipes">Similar Recipes</string>
 
 </resources>

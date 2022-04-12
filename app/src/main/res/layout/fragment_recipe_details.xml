@@ -330,6 +330,27 @@
             app:srcCompat="@drawable/gluten_free" />
 
         <TextView
+            android:id="@+id/pairedWineTitle"
+            style="@style/S1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/pairedWines"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/glutenFreeText" />
+
+        <TextView
+            android:id="@+id/pairedWineText"
+            style="@style/P1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/text_not_found"
+            app:layout_constraintStart_toStartOf="@id/pairedWineTitle"
+            app:layout_constraintTop_toBottomOf="@id/pairedWineTitle" />
+
+        <TextView
             android:id="@+id/similarRecipesText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -338,7 +359,7 @@
             android:text="@string/similarRecipes"
             android:textAppearance="@style/S1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/glutenFreeIcon" />
+            app:layout_constraintTop_toBottomOf="@+id/pairedWineText" />
 
 
         <androidx.recyclerview.widget.RecyclerView

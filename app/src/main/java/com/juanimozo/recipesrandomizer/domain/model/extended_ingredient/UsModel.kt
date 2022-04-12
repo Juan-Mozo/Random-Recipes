@@ -1,11 +1,11 @@
-package com.juanimozo.recipesrandomizer.data.remote.dto.random_recipes
+package com.juanimozo.recipesrandomizer.domain.model.extended_ingredient
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Metric(
+data class UsModel(
     val amount: Double,
     val unitLong: String,
     val unitShort: String
-): Parcelable
+) : Parcelable

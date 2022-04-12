@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_random_recipes" >
         <action
             android:id="@+id/action_randomRecipesFragment_to_randomRecipesRVFragment"
-            app:destination="@id/randomRecipesRVFragment" />
+            app:destination="@id/randomRecipesRVFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/searchRecipesFragment"
@@ -21,7 +23,9 @@
         tools:layout="@layout/fragment_search_recipes" >
         <action
             android:id="@+id/action_searchRecipesFragment_to_searchRecipesRVFragment"
-            app:destination="@id/searchRecipesRVFragment" />
+            app:destination="@id/searchRecipesRVFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/savedRecipesFragment"
@@ -35,7 +39,9 @@
         tools:layout="@layout/fragment_random_recipes_r_v" >
         <action
             android:id="@+id/action_randomRecipesRVFragment_to_recipeDetails"
-            app:destination="@id/recipeDetails" />
+            app:destination="@id/recipeDetails"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/recipeDetails"
@@ -47,7 +53,9 @@
             app:argType="com.juanimozo.recipesrandomizer.domain.model.Recipe" />
         <action
             android:id="@+id/action_recipeDetails_self"
-            app:destination="@id/recipeDetails" />
+            app:destination="@id/recipeDetails"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/searchRecipesRVFragment"
@@ -56,7 +64,9 @@
         tools:layout="@layout/fragment_search_recipes_rv" >
         <action
             android:id="@+id/action_searchRecipesRVFragment_to_recipeDetails"
-            app:destination="@id/recipeDetails" />
+            app:destination="@id/recipeDetails"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <argument
             android:name="query"
             app:argType="string" />

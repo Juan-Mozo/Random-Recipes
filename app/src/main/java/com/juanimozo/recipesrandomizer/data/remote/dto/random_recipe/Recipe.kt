@@ -1,4 +1,4 @@
-package com.juanimozo.recipesrandomizer.data.remote.dto.random_recipes
+package com.juanimozo.recipesrandomizer.data.remote.dto.random_recipe
 
 import com.juanimozo.recipesrandomizer.domain.model.Recipe
 
@@ -7,7 +7,7 @@ data class Recipe(
     val analyzedInstructions: List<AnalyzedInstruction>,
     val cheap: Boolean,
     val creditsText: String,
-    val cuisines: List<String>,
+    val cuisines: List<Any>,
     val dairyFree: Boolean,
     val diets: List<String>,
     val dishTypes: List<String>,
@@ -47,16 +47,13 @@ data class Recipe(
             instructions = instructions,
             servings = servings,
             readyInMinutes = readyInMinutes,
-            // cuisines = cuisines,
-            extendedIngredients = extendedIngredients,
-            dishType = dishTypes,
+            extendedIngredients = extendedIngredients.map { it.toInformationExtendedIngredient() },
             cheap = cheap,
             vegan = vegan,
             vegetarian = vegetarian,
             glutenFree = glutenFree,
             healthScore = healthScore,
-            // pairedWines = null,
-            // pairedWineText = null
+            pairedWineText = null
         )
     }
 }

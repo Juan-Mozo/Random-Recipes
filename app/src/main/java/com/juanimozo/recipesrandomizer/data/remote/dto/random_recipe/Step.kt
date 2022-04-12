@@ -1,4 +1,4 @@
-package com.juanimozo.recipesrandomizer.data.remote.dto.random_recipes
+package com.juanimozo.recipesrandomizer.data.remote.dto.random_recipe
 
 data class Step(
     val equipment: List<Equipment>,

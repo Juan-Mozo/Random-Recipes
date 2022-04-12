@@ -10,9 +10,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.juanimozo.recipesrandomizer.R
 import com.juanimozo.recipesrandomizer.databinding.FragmentSearchRecipesRvBinding
 import com.juanimozo.recipesrandomizer.presentation.search_recipe.SearchRecipesAdapter
+import com.juanimozo.recipesrandomizer.presentation.util.SetAnimation
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
@@ -25,16 +28,14 @@ class SearchRecipesRVFragment : Fragment() {
 
     private val args: SearchRecipesRVFragmentArgs by navArgs()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentSearchRecipesRvBinding.inflate(inflater, container, false)
+
+        // Start loading animation
+        SetAnimation().startAnimation(binding.loadingFoodAnimation, R.raw.loading_food)
 
         // Make call to bring list of results
         viewModel.searchRecipes(
@@ -68,9 +69,10 @@ class SearchRecipesRVFragment : Fragment() {
     private fun observeState(rvAdapter: SearchRecipesAdapter) {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.searchRecipe.collect {
-                // Hide progressBar when isLoading = False
+                delay(2000)
+                // Stop and hide animation when isLoading = False
                 if (!it.isLoading) {
-                    binding.progressBar.visibility = View.GONE
+                    SetAnimation().finishAnimation(binding.loadingFoodAnimation)
                 }
                 // Submit new list to adapter
                 rvAdapter.submitList(it.recipes)
