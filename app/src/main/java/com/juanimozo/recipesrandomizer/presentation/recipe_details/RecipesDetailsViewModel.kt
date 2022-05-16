@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.juanimozo.recipesrandomizer.core.util.Resource
 import com.juanimozo.recipesrandomizer.domain.model.Recipe
 import com.juanimozo.recipesrandomizer.domain.use_case.RecipeUseCases
+import com.juanimozo.recipesrandomizer.presentation.recipe_details.state.RecipeDetailsEvent
 import com.juanimozo.recipesrandomizer.presentation.recipe_details.state.SimilarRecipesState
 import com.juanimozo.recipesrandomizer.presentation.util.EmptyModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,8 +27,12 @@ class RecipeDetailsViewModel @Inject constructor(
     private val _newRecipe = MutableSharedFlow<Recipe>()
     val newRecipe = _newRecipe.asSharedFlow()
 
+    private val _isRecipeFavorite = MutableStateFlow(false)
+    val isRecipeFavorite = _isRecipeFavorite.asStateFlow()
+
     private var getSimilarRecipesJob: Job? = null
     private var getRecipeInfoJob: Job? = null
+    private var likeRecipeJob: Job? = null
 
     fun getSimilarRecipes(id: Int) {
         getSimilarRecipesJob?.cancel()
@@ -80,4 +85,26 @@ class RecipeDetailsViewModel @Inject constructor(
                 }
         }
     }
+
+    fun onLikedRecipe(
+        event: RecipeDetailsEvent
+    ) {
+        when (event) {
+            is RecipeDetailsEvent.MakeFavourite -> {
+                likeRecipeJob?.cancel()
+                likeRecipeJob = viewModelScope.launch {
+                    recipeUseCases.saveRecipeUseCase(event.recipe)
+                    _isRecipeFavorite.value = true
+                }
+            }
+            is RecipeDetailsEvent.UndoFavourite -> {
+                likeRecipeJob?.cancel()
+                likeRecipeJob = viewModelScope.launch {
+                    recipeUseCases.deleteRecipeUseCase(event.recipe.id)
+                    _isRecipeFavorite.value = false
+                }
+            }
+        }
+    }
+
 }

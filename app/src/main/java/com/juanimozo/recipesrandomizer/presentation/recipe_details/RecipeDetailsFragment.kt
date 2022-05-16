@@ -13,13 +13,16 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.airbnb.lottie.LottieAnimationView
 import com.juanimozo.recipesrandomizer.R
 import com.juanimozo.recipesrandomizer.databinding.FragmentRecipeDetailsBinding
+import com.juanimozo.recipesrandomizer.domain.model.Recipe
+import com.juanimozo.recipesrandomizer.presentation.recipe_details.state.RecipeDetailsEvent
+import com.juanimozo.recipesrandomizer.presentation.util.SetAnimation
 import com.juanimozo.recipesrandomizer.presentation.util.getImage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
 class RecipeDetailsFragment : Fragment() {
@@ -38,6 +41,11 @@ class RecipeDetailsFragment : Fragment() {
     ): View {
         _binding = FragmentRecipeDetailsBinding.inflate(inflater, container, false)
 
+        // Use save_animation as icon in fab
+        val likeAnimationAsIcon = SetAnimation(binding.likeButtonAnimation, R.raw.save_animation)
+        // Set first frame as inactive icon
+        likeAnimationAsIcon.setFrame(0)
+
         // Bind recipe image
         if(args.recipe.image != null && args.recipe.image!!.isNotEmpty()) {
             getImage(
@@ -53,6 +61,17 @@ class RecipeDetailsFragment : Fragment() {
         binding.readyInAmount.text = args.recipe.readyInMinutes.toString()
         binding.instructionsText.text = args.recipe.instructions
         binding.pairedWineText.text = args.recipe.pairedWineText
+
+        // Floating Action Button
+        binding.likeRecipeButton.setOnClickListener {
+            // If recipe is already in favourites, delete it
+            if (viewModel.isRecipeFavorite.value) {
+                manageLikeButton(true, args.recipe, likeAnimationAsIcon)
+            } else {
+                manageLikeButton(false, args.recipe, likeAnimationAsIcon)
+            }
+        }
+
 
         // Set transparency icons
             // Cheap Icon
@@ -126,6 +145,18 @@ class RecipeDetailsFragment : Fragment() {
                 )
                 findNavController().navigate(action)
             }
+        }
+    }
+
+    private fun manageLikeButton(isFavorite: Boolean, recipe: Recipe, view: SetAnimation) {
+        // If recipe is not already liked, save it and change the icon of FAB
+        if (!isFavorite) {
+            viewModel.onLikedRecipe(RecipeDetailsEvent.MakeFavourite(recipe))
+            view.setFrame(39)
+        } else {
+            // If recipes is already saved, delete it and change the icon of FAB
+            viewModel.onLikedRecipe(RecipeDetailsEvent.UndoFavourite(recipe))
+            view.setFrame(0)
         }
     }
 

@@ -25,7 +25,7 @@ class RandomRecipesViewModel @Inject constructor(
         getRandomRecipes()
     }
 
-    fun getRandomRecipes() {
+    private fun getRandomRecipes() {
         getRandomRecipesJob?.cancel()
         getRandomRecipesJob = viewModelScope.launch {
             recipeUseCases.getRandomRecipesUseCase()
@@ -34,7 +34,8 @@ class RandomRecipesViewModel @Inject constructor(
                         is Resource.Success -> {
                             _randomRecipesState.value = randomRecipesState.value.copy(
                                 recipes = result.data ?: emptyList(),
-                                isLoading = false
+                                isLoading = false,
+                                recipesAreLoaded = true
                             )
                         }
                         is Resource.Loading -> {

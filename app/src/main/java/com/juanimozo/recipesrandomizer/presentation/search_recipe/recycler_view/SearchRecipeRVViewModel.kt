@@ -18,8 +18,8 @@ class SearchRecipeRVViewModel @Inject constructor(
     private val recipeUseCases: RecipeUseCases
 ): ViewModel() {
 
-    private val _searchRecipe = MutableStateFlow(SearchRecipesState(emptyList(), false))
-    val searchRecipe = _searchRecipe.asStateFlow()
+    private val _searchRecipeState = MutableStateFlow(SearchRecipesState(emptyList(), false, false))
+    val searchRecipeState = _searchRecipeState.asStateFlow()
 
     private val _newRecipe = MutableSharedFlow<Recipe>()
     val newRecipe = _newRecipe.asSharedFlow()
@@ -38,13 +38,14 @@ class SearchRecipeRVViewModel @Inject constructor(
                 .collect { result ->
                     when (result) {
                         is Resource.Success -> {
-                            _searchRecipe.value = searchRecipe.value.copy(
+                            _searchRecipeState.value = searchRecipeState.value.copy(
                                 recipes = result.data ?: emptyList(),
-                                isLoading = false
+                                isLoading = false,
+                                areRecipesLoaded = true
                             )
                         }
                         is Resource.Loading -> {
-                            _searchRecipe.value = searchRecipe.value.copy(
+                            _searchRecipeState.value = searchRecipeState.value.copy(
                                 recipes = result.data ?: emptyList(),
                                 isLoading = true
                             )

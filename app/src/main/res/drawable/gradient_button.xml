@@ -5,7 +5,7 @@
         android:state_enabled="true">
         <shape
             android:shape="rectangle">
-            <solid
+            <gradient
                 android:color="@color/gray"/>
             <stroke
                 android:width="0.5dp"
@@ -24,7 +24,7 @@
         <shape
             android:shape="rectangle">
             <gradient
-                android:startColor="@color/light_green_blue"
+                android:startColor="@color/beige"
                 android:endColor="@color/light_salmon" />
             <stroke
                 android:width="0.5dp"

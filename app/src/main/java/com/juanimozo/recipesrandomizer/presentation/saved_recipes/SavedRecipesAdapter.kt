@@ -1,4 +1,4 @@
-package com.juanimozo.recipesrandomizer.presentation.random_recipes
+package com.juanimozo.recipesrandomizer.presentation.saved_recipes
 
 import android.view.LayoutInflater
 import android.view.View
@@ -12,15 +12,15 @@ import com.juanimozo.recipesrandomizer.R
 import com.juanimozo.recipesrandomizer.domain.model.Recipe
 import com.juanimozo.recipesrandomizer.presentation.util.getImage
 
-class RecipesListViewHolder(
+class SavedRecipesViewHolder(
     view: View
 ): RecyclerView.ViewHolder(view) {
 
-    private val recipeTitle = view.findViewById<TextView>(R.id.random_item_title)
-    private val recipeImage = view.findViewById<ImageView>(R.id.random_item_image)
+    private val recipeName = view.findViewById<TextView>(R.id.saved_recipe_item_text)
+    private val recipeImage = view.findViewById<ImageView>(R.id.saved_recipe_item_image)
 
     fun bind(item: Recipe) {
-        recipeTitle.text = item.title
+        recipeName.text = item.title
         if(item.image != null) {
             getImage(
                 url = item.image,
@@ -29,12 +29,11 @@ class RecipesListViewHolder(
             )
         }
     }
-
 }
 
-class RandomRecipesAdapter(
+class SavedRecipesAdapter(
     private val listener: (Recipe) -> Unit
-): ListAdapter<Recipe, RecipesListViewHolder>(DIFF_CONFIG) {
+): ListAdapter<Recipe, SavedRecipesViewHolder>(DIFF_CONFIG) {
 
     companion object {
         val DIFF_CONFIG = object : DiffUtil.ItemCallback<Recipe>() {
@@ -49,15 +48,14 @@ class RandomRecipesAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipesListViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SavedRecipesViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.random_recipe_item, parent, false)
-        return RecipesListViewHolder(view)
+            .inflate(R.layout.saved_recipes_item, parent, false)
+        return SavedRecipesViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: RecipesListViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SavedRecipesViewHolder, position: Int) {
         holder.bind(getItem(position))
         holder.itemView.setOnClickListener { listener(getItem(position)) }
     }
-
 }

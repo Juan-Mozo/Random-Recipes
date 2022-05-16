@@ -1,6 +1,8 @@
 package com.juanimozo.recipesrandomizer.domain.model
 
 import android.os.Parcelable
+import com.juanimozo.recipesrandomizer.core.util.ConvertBoolean
+import com.juanimozo.recipesrandomizer.data.local.RecipeEntity
 import com.juanimozo.recipesrandomizer.domain.model.extended_ingredient.ExtendedIngredientModel
 import kotlinx.parcelize.Parcelize
 
@@ -19,4 +21,22 @@ data class Recipe(
     val glutenFree: Boolean,
     val healthScore: Double,
     val pairedWineText: String?
-): Parcelable
+): Parcelable {
+    fun toRecipeEntity(): RecipeEntity {
+        return RecipeEntity(
+            id = id,
+            title = title,
+            image = image,
+            instructions = instructions,
+            servings = servings,
+            readyInMinutes = readyInMinutes,
+            extendedIngredients = extendedIngredients ?: emptyList(),
+            cheap = ConvertBoolean().booleanToInt(cheap),
+            vegan = ConvertBoolean().booleanToInt(vegan),
+            vegetarian = ConvertBoolean().booleanToInt(vegetarian),
+            glutenFree = ConvertBoolean().booleanToInt(glutenFree),
+            healthScore = healthScore.toInt(),
+            pairedWineText = pairedWineText
+        )
+    }
+}

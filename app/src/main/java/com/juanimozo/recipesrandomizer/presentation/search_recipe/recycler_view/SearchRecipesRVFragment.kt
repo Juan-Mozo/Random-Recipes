@@ -34,8 +34,7 @@ class SearchRecipesRVFragment : Fragment() {
     ): View? {
         _binding = FragmentSearchRecipesRvBinding.inflate(inflater, container, false)
 
-        // Start loading animation
-        SetAnimation().startAnimation(binding.loadingFoodAnimation, R.raw.loading_food)
+        val loadingAnimation = SetAnimation(binding.loadingFoodAnimation, R.raw.start_animation)
 
         // Make call to bring list of results
         viewModel.searchRecipes(
@@ -55,7 +54,13 @@ class SearchRecipesRVFragment : Fragment() {
         }
         recyclerView.adapter = recyclerViewAdapter
 
-        observeState(recyclerViewAdapter)
+        // Only start animation when there are no recipes loaded in viewModel
+        if(!viewModel.searchRecipeState.value.areRecipesLoaded) {
+            observeState(recyclerViewAdapter, loadingAnimation)
+        } else {
+            recyclerViewAdapter.submitList(viewModel.searchRecipeState.value.recipes)
+            binding.loadingFoodAnimation.visibility = View.GONE
+        }
 
         return binding.root
     }
@@ -66,13 +71,15 @@ class SearchRecipesRVFragment : Fragment() {
     }
 
     // Observer of RandomRecipesState in ViewModel
-    private fun observeState(rvAdapter: SearchRecipesAdapter) {
+    private fun observeState(rvAdapter: SearchRecipesAdapter, animation: SetAnimation) {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.searchRecipe.collect {
-                delay(2000)
+            viewModel.searchRecipeState.collect {
+                // Start loading animation
+                animation.startAnimation()
+                delay(1500)
                 // Stop and hide animation when isLoading = False
-                if (!it.isLoading) {
-                    SetAnimation().finishAnimation(binding.loadingFoodAnimation)
+                if (it.areRecipesLoaded) {
+                    animation.finishAnimation()
                 }
                 // Submit new list to adapter
                 rvAdapter.submitList(it.recipes)

@@ -9,10 +9,10 @@
     <ImageView
         android:id="@+id/searchBannerImageView"
         android:layout_width="wrap_content"
-        android:layout_height="136dp"
+        android:layout_height="100dp"
         android:cropToPadding="true"
         android:scaleType="fitStart"
-        android:src="@drawable/wave_background_search"
+        android:src="@drawable/wave_background_search_2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -57,8 +57,11 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/s_light_green_blue"
-            android:padding="8dp">
+            android:background="@color/beige"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp">
 
             <ImageView
                 android:id="@+id/searchIcon"
@@ -113,7 +116,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/s_light_green_blue"
+            android:background="@color/beige"
             android:padding="8dp">
 
             <TextView
@@ -169,7 +172,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/s_light_green_blue"
+            android:background="@color/beige"
             android:padding="8dp">
 
             <TextView
@@ -215,7 +218,7 @@
         android:id="@+id/search_button"
         android:layout_width="@dimen/button_width"
         android:layout_height="@dimen/button_height"
-        android:backgroundTint="@color/s_light_green_blue"
+        android:backgroundTint="@color/beige"
         android:text="@string/search_button"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -18,11 +18,11 @@ interface SpoonacularApi {
     ): RecipeInformationDto
 
     // Get 10 random recipes
-    @GET("random?apiKey=4a64dafdf3b74e4fb0f27ced23b2ca16&number=10")
+    @GET("random?apiKey=4a64dafdf3b74e4fb0f27ced23b2ca16&number=20")
     suspend fun getRandomRecipes(): RandomRecipesDto
 
     // Search 10 recipes sort by popularity, with cuisine and diet as parameters
-    @GET("complexSearch?apiKey=4a64dafdf3b74e4fb0f27ced23b2ca16&number=10&sort=popularity")
+    @GET("complexSearch?apiKey=4a64dafdf3b74e4fb0f27ced23b2ca16&number=40&sort=popularity")
     suspend fun searchRecipe(
         @Query("query") query: String,
         @Query("cuisine") cuisine: String,

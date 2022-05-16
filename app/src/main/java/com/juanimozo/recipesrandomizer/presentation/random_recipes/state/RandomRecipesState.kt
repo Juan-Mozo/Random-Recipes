@@ -4,5 +4,6 @@ import com.juanimozo.recipesrandomizer.domain.model.Recipe
 
 data class RandomRecipesState(
     val recipes: List<Recipe> = emptyList(),
-    val isLoading: Boolean = false
+    val isLoading: Boolean = false,
+    val recipesAreLoaded: Boolean = false
 )

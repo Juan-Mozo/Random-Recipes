@@ -14,13 +14,17 @@
 
     <!-- recipe_details Icons -->
     <dimen name="icon_size">40dp</dimen>
+    <dimen name="s_icon_size">30dp</dimen>
 
     <!-- AppCompactButton -->
-    <dimen name="button_height">56dp</dimen>
-    <dimen name="button_width">160dp</dimen>
+    <dimen name="button_height">65dp</dimen>
+    <dimen name="button_width">190dp</dimen>
 
     <!-- EditText -->
     <dimen name="edit_text_height">48dp</dimen>
+
+    <!-- Header -->
+    <dimen name="saved_recipes_header">125dp</dimen>
 
     <!-- ProgressBar -->
     <dimen name="pb_size">70dp</dimen>

@@ -2,10 +2,11 @@ package com.juanimozo.recipesrandomizer.data.local
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.juanimozo.recipesrandomizer.core.util.ConvertBoolean
 import com.juanimozo.recipesrandomizer.domain.model.Recipe
 import com.juanimozo.recipesrandomizer.domain.model.extended_ingredient.ExtendedIngredientModel
 
-@Entity
+@Entity(tableName = "recipe_table")
 data class RecipeEntity(
     @PrimaryKey val id: Int,
     val title: String,
@@ -13,12 +14,12 @@ data class RecipeEntity(
     val instructions: String,
     val servings: Int,
     val readyInMinutes: Int,
-    val extendedIngredients: List<ExtendedIngredientModel>?,
-    val cheap: Boolean,
-    val vegan: Boolean,
-    val vegetarian: Boolean,
-    val glutenFree: Boolean,
-    val healthScore: Double,
+    val extendedIngredients: List<ExtendedIngredientModel>,
+    val cheap: Int,
+    val vegan: Int,
+    val vegetarian: Int,
+    val glutenFree: Int,
+    val healthScore: Int,
     val pairedWineText: String?
 ) {
     fun toRecipeModel(): Recipe {
@@ -30,11 +31,11 @@ data class RecipeEntity(
             servings = servings,
             readyInMinutes = readyInMinutes,
             extendedIngredients = extendedIngredients,
-            cheap = cheap,
-            vegan = vegan,
-            vegetarian = vegetarian,
-            glutenFree = glutenFree,
-            healthScore = healthScore,
+            cheap = ConvertBoolean().intToBoolean(cheap),
+            vegan = ConvertBoolean().intToBoolean(vegan),
+            vegetarian = ConvertBoolean().intToBoolean(vegetarian),
+            glutenFree = ConvertBoolean().intToBoolean(glutenFree),
+            healthScore = healthScore.toDouble(),
             pairedWineText = pairedWineText
         )
     }

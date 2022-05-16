@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.juanimozo.recipesrandomizer.R
 import com.juanimozo.recipesrandomizer.databinding.FragmentRandomRecipesRVBinding
+import com.juanimozo.recipesrandomizer.presentation.util.RecipesAdapter
 import com.juanimozo.recipesrandomizer.presentation.util.SetAnimation
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -30,13 +31,12 @@ class RandomRecipesRVFragment : Fragment() {
     ): View {
         _binding = FragmentRandomRecipesRVBinding.inflate(inflater, container, false)
 
-        // Start loading animation
-        SetAnimation().startAnimation(binding.loadingFoodAnimation, R.raw.loading_food)
+        val loadingAnimation = SetAnimation(binding.loadingFoodAnimation, R.raw.loading_food)
 
         val recyclerView = binding.randomRecipesRv
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        val recyclerViewAdapter = RandomRecipesAdapter { recipe ->
+        val recyclerViewAdapter = RecipesAdapter { recipe ->
 
             // Navigate to RecipeDetailsFragment
             val action = RandomRecipesRVFragmentDirections.actionRandomRecipesRVFragmentToRecipeDetails(
@@ -46,8 +46,14 @@ class RandomRecipesRVFragment : Fragment() {
         }
         recyclerView.adapter = recyclerViewAdapter
 
-        // Observe RandomRecipesState
-        observeState(recyclerViewAdapter)
+        // Only start animation when there are no recipes loaded in viewModel
+        if(!viewModel.randomRecipesState.value.recipesAreLoaded) {
+            // Observe RandomRecipesState
+            observeState(recyclerViewAdapter, loadingAnimation)
+        } else {
+            recyclerViewAdapter.submitList(viewModel.randomRecipesState.value.recipes)
+            binding.loadingFoodAnimation.visibility = View.GONE
+        }
 
         return binding.root
     }
@@ -58,13 +64,15 @@ class RandomRecipesRVFragment : Fragment() {
     }
 
     // Observer of RandomRecipesState in ViewModel
-    private fun observeState(rvAdapter: RandomRecipesAdapter) {
+    private fun observeState(rvAdapter: RecipesAdapter, animation: SetAnimation) {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.randomRecipesState.collect {
-                delay(2000)
+                // Start loading animation
+                animation.startAnimation()
+                delay(1500)
                 // Stop and hide animation when isLoading = False
-                if (!it.isLoading) {
-                    SetAnimation().finishAnimation(binding.loadingFoodAnimation)
+                if (it.recipesAreLoaded) {
+                    animation.finishAnimation()
                 }
                 // Submit new list to adapter
                 rvAdapter.submitList(it.recipes)

@@ -31,7 +31,14 @@
         android:id="@+id/savedRecipesFragment"
         android:name="com.juanimozo.recipesrandomizer.presentation.saved_recipes.SavedRecipesFragment"
         android:label="Saved Recipes"
-        tools:layout="@layout/fragment_saved_recipes" />
+        tools:layout="@layout/fragment_saved_recipes" >
+        <action
+            android:id="@+id/action_savedRecipesFragment_to_recipeDetails"
+            app:destination="@id/recipeDetails" />
+        <action
+            android:id="@+id/action_savedRecipesFragment_to_allSavedRecipesFragment"
+            app:destination="@id/allSavedRecipesFragment" />
+    </fragment>
     <fragment
         android:id="@+id/randomRecipesRVFragment"
         android:name="com.juanimozo.recipesrandomizer.presentation.random_recipes.RandomRecipesRVFragment"
@@ -76,5 +83,14 @@
         <argument
             android:name="diet"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/allSavedRecipesFragment"
+        android:name="com.juanimozo.recipesrandomizer.presentation.saved_recipes.all_saved_recipes.AllSavedRecipesFragment"
+        android:label="fragment_all_saved_recipes"
+        tools:layout="@layout/fragment_all_saved_recipes" >
+        <action
+            android:id="@+id/action_allSavedRecipesFragment_to_recipeDetails"
+            app:destination="@id/recipeDetails" />
     </fragment>
 </navigation>
