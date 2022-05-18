@@ -18,7 +18,7 @@ interface RecipeDao {
     suspend fun selectAllRecipes(): List<RecipeEntity>
 
     // Select recipes that are made in less than 30 minutes
-    @Query("SELECT * FROM recipe_table WHERE readyInMinutes < 30 ORDER BY title DESC")
+    @Query("SELECT * FROM recipe_table WHERE readyInMinutes <= 45 ORDER BY title DESC")
     suspend fun selectQuickRecipes(): List<RecipeEntity>
 
     // Select cheap recipes
@@ -33,6 +33,8 @@ interface RecipeDao {
     @Query("SELECT * FROM recipe_table WHERE healthScore > 30 ORDER BY title DESC")
     suspend fun selectHealthyRecipes(): List<RecipeEntity>
 
-
+    // Select id to check if the id passed is in the database
+    @Query("SELECT id FROM recipe_table WHERE id IN(:id)")
+    suspend fun checkIfRecipeIsSaved(id: Int): Int?
 
 }

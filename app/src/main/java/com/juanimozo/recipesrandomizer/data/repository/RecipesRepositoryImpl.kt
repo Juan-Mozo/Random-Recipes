@@ -134,4 +134,17 @@ class RecipesRepositoryImpl @Inject constructor(
         }
     }
 
+    override fun checkIfRecipeIsSaved(id: Int): Flow<Boolean> = flow {
+        try {
+            val result = db.checkIfRecipeIsSaved(id)
+            if(result == id) {
+                emit(true)
+            } else {
+                emit(false)
+            }
+        } catch (e: IOException) {
+
+        }
+    }
+
 }

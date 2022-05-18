@@ -69,7 +69,7 @@ class RandomRecipesRVFragment : Fragment() {
             viewModel.randomRecipesState.collect {
                 // Start loading animation
                 animation.startAnimation()
-                delay(1500)
+                delay(animation.animation.duration)
                 // Stop and hide animation when isLoading = False
                 if (it.recipesAreLoaded) {
                     animation.finishAnimation()

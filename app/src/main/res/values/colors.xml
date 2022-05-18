@@ -33,6 +33,7 @@
     <color name="transparent">#00FFFFFF</color>
     <color name="gray">#B5B5B5</color>
     <color name="dark_gray">#4E4E4E</color>
+    <color name="semi_transparent_black">#A6000000</color>
     <color name="black">#FF000000</color>
 
 </resources>

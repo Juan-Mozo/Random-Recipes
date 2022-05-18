@@ -1,6 +1,5 @@
 package com.juanimozo.recipesrandomizer.presentation.recipe_details
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.juanimozo.recipesrandomizer.core.util.Resource
@@ -11,7 +10,6 @@ import com.juanimozo.recipesrandomizer.presentation.recipe_details.state.Similar
 import com.juanimozo.recipesrandomizer.presentation.util.EmptyModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -30,9 +28,20 @@ class RecipeDetailsViewModel @Inject constructor(
     private val _isRecipeFavorite = MutableStateFlow(false)
     val isRecipeFavorite = _isRecipeFavorite.asStateFlow()
 
+    private var checkLikedRecipeJob: Job? = null
     private var getSimilarRecipesJob: Job? = null
     private var getRecipeInfoJob: Job? = null
     private var likeRecipeJob: Job? = null
+
+    fun checkLikedRecipe(id: Int) {
+        checkLikedRecipeJob?.cancel()
+        checkLikedRecipeJob = viewModelScope.launch {
+            recipeUseCases.checkIfRecipesIsSavedUseCase(id)
+                .collect { result ->
+                    _isRecipeFavorite.value = result
+                }
+        }
+    }
 
     fun getSimilarRecipes(id: Int) {
         getSimilarRecipesJob?.cancel()

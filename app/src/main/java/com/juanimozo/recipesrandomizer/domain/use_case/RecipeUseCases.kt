@@ -7,5 +7,6 @@ data class RecipeUseCases(
     val getSimilarRecipesUseCase: GetSimilarRecipesUseCase,
     val saveRecipeUseCase: SaveRecipeUseCase,
     val deleteRecipeUseCase: DeleteRecipeUseCase,
-    val getSavedRecipesUseCase: GetSavedRecipesUseCase
+    val getSavedRecipesUseCase: GetSavedRecipesUseCase,
+    val checkIfRecipesIsSavedUseCase: CheckIfRecipesIsSavedUseCase
 )

@@ -76,7 +76,7 @@ class SearchRecipesRVFragment : Fragment() {
             viewModel.searchRecipeState.collect {
                 // Start loading animation
                 animation.startAnimation()
-                delay(1500)
+                delay(animation.animation.duration)
                 // Stop and hide animation when isLoading = False
                 if (it.areRecipesLoaded) {
                     animation.finishAnimation()

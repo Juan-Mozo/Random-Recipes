@@ -1,7 +1,6 @@
 package com.juanimozo.recipesrandomizer.presentation.recipe_details
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +20,7 @@ import com.juanimozo.recipesrandomizer.presentation.recipe_details.state.RecipeD
 import com.juanimozo.recipesrandomizer.presentation.util.SetAnimation
 import com.juanimozo.recipesrandomizer.presentation.util.getImage
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
@@ -42,9 +41,12 @@ class RecipeDetailsFragment : Fragment() {
         _binding = FragmentRecipeDetailsBinding.inflate(inflater, container, false)
 
         // Use save_animation as icon in fab
-        val likeAnimationAsIcon = SetAnimation(binding.likeButtonAnimation, R.raw.save_animation)
-        // Set first frame as inactive icon
-        likeAnimationAsIcon.setFrame(0)
+        val likeAnimation = SetAnimation(binding.likeButtonAnimation, R.raw.save_animation)
+        val likeAnimationAsIcon = SetAnimation(binding.likeButtonIcon, R.raw.save_animation)
+
+        // Check if current recipe is already saved as favorite
+        viewModel.checkLikedRecipe(args.recipe.id)
+        observeIsRecipeFavorite(likeAnimationAsIcon)
 
         // Bind recipe image
         if(args.recipe.image != null && args.recipe.image!!.isNotEmpty()) {
@@ -66,9 +68,9 @@ class RecipeDetailsFragment : Fragment() {
         binding.likeRecipeButton.setOnClickListener {
             // If recipe is already in favourites, delete it
             if (viewModel.isRecipeFavorite.value) {
-                manageLikeButton(true, args.recipe, likeAnimationAsIcon)
+                manageLikeButton(true, args.recipe, likeAnimation, likeAnimationAsIcon.animation)
             } else {
-                manageLikeButton(false, args.recipe, likeAnimationAsIcon)
+                manageLikeButton(false, args.recipe, likeAnimation, likeAnimationAsIcon.animation)
             }
         }
 
@@ -114,15 +116,9 @@ class RecipeDetailsFragment : Fragment() {
         _binding = null
     }
 
-    private fun setTransparency(
-        value: Boolean,
-        // Icon
-        iV: ImageView,
-        // TextView with Yes or No
-        tV: TextView
-    ) {
+    private fun setTransparency(value: Boolean, icon: ImageView, tV: TextView) {
         if (!value) {
-            iV.imageAlpha = 30
+            icon.imageAlpha = 30
             tV.text = getString(R.string.no)
         }
     }
@@ -148,15 +144,34 @@ class RecipeDetailsFragment : Fragment() {
         }
     }
 
-    private fun manageLikeButton(isFavorite: Boolean, recipe: Recipe, view: SetAnimation) {
-        // If recipe is not already liked, save it and change the icon of FAB
+    private fun observeIsRecipeFavorite(view: SetAnimation) {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.isRecipeFavorite.collect { isFavorite ->
+                if (isFavorite) {
+                    view.setFrame(39)
+                } else {
+                    view.setFrame(0)
+                }
+            }
+        }
+    }
+
+    private fun manageLikeButton(isFavorite: Boolean, recipe: Recipe, view: SetAnimation, icon: LottieAnimationView) {
+        // If recipe is not already liked, save it and start animation in FAB
         if (!isFavorite) {
+            val animationJob = Job()
+            val uiScope = CoroutineScope(Dispatchers.Main + animationJob)
+
             viewModel.onLikedRecipe(RecipeDetailsEvent.MakeFavourite(recipe))
-            view.setFrame(39)
+
+            uiScope.launch(Dispatchers.Main) {
+                view.likeAnimation(icon, 39)
+                animationJob.cancel()
+            }
+
         } else {
             // If recipes is already saved, delete it and change the icon of FAB
             viewModel.onLikedRecipe(RecipeDetailsEvent.UndoFavourite(recipe))
-            view.setFrame(0)
         }
     }
 

@@ -65,7 +65,8 @@ object RecipesRandomizerModule {
             getSimilarRecipesUseCase = GetSimilarRecipesUseCase(repository),
             deleteRecipeUseCase = DeleteRecipeUseCase(repository),
             getSavedRecipesUseCase = GetSavedRecipesUseCase(repository),
-            saveRecipeUseCase = SaveRecipeUseCase(repository)
+            saveRecipeUseCase = SaveRecipeUseCase(repository),
+            checkIfRecipesIsSavedUseCase = CheckIfRecipesIsSavedUseCase(repository)
         )
     }
 

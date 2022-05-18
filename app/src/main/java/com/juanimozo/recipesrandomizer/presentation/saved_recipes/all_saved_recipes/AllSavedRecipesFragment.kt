@@ -31,8 +31,6 @@ class AllSavedRecipesFragment : Fragment() {
     ): View {
         _binding = FragmentAllSavedRecipesBinding.inflate(inflater, container, false)
 
-        val loadingAnimation = SetAnimation(binding.loadingSavedRecipesAnimation, R.raw.loading_saved_recipes_animation)
-
         val recyclerView = binding.allSavedRecipesRV
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
@@ -49,10 +47,9 @@ class AllSavedRecipesFragment : Fragment() {
         // Only start animation when there are no recipes loaded in viewModel
         if (!viewModel.allRecipesState.value.recipesAreLoaded) {
             // Observe RandomRecipesState
-            observeState(recyclerViewAdapter, loadingAnimation)
+            observeState(recyclerViewAdapter)
         } else {
             recyclerViewAdapter.submitList(viewModel.allRecipesState.value.recipes)
-            binding.loadingSavedRecipesAnimation.visibility = View.GONE
         }
 
 
@@ -64,16 +61,9 @@ class AllSavedRecipesFragment : Fragment() {
         _binding = null
     }
 
-    private fun observeState(rvAdapter: RecipesAdapter, animation: SetAnimation) {
+    private fun observeState(rvAdapter: RecipesAdapter) {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.allRecipesState.collect {
-                // Start loading animation
-                animation.startAnimation()
-                delay(1500)
-                // Stop and hide animation when isLoading = False
-                if (it.recipesAreLoaded) {
-                    animation.finishAnimation()
-                }
                 // Submit new list to adapter
                 rvAdapter.submitList(it.recipes)
             }

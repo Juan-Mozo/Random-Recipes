@@ -31,4 +31,6 @@ interface RecipesRepository {
 
     fun getHealthySavedRecipes(): Flow<List<Recipe>>
 
+    fun checkIfRecipeIsSaved(id: Int): Flow<Boolean>
+
 }
