@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.juanimozo.recipesrandomizer.R
 import com.juanimozo.recipesrandomizer.databinding.FragmentRandomRecipesRVBinding
+import com.juanimozo.recipesrandomizer.presentation.util.InternetConnection
 import com.juanimozo.recipesrandomizer.presentation.util.RecipesAdapter
 import com.juanimozo.recipesrandomizer.presentation.util.SetAnimation
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,13 +24,17 @@ class RandomRecipesRVFragment : Fragment() {
     private var _binding: FragmentRandomRecipesRVBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: RandomRecipesViewModel by viewModels()
+    private val viewModel: RandomRecipesRVViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentRandomRecipesRVBinding.inflate(inflater, container, false)
+
+        // Internet Connection
+        checkInternetConnection()
+        observeInternetConnection()
 
         val loadingAnimation = SetAnimation(binding.loadingFoodAnimation, R.raw.loading_food)
 
@@ -53,6 +58,7 @@ class RandomRecipesRVFragment : Fragment() {
         } else {
             recyclerViewAdapter.submitList(viewModel.randomRecipesState.value.recipes)
             binding.loadingFoodAnimation.visibility = View.GONE
+            binding.randomRecipesDivider.visibility = View.VISIBLE
         }
 
         return binding.root
@@ -61,6 +67,16 @@ class RandomRecipesRVFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun observeInternetConnection() {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.internetConnection.collect { isInternetConnected ->
+                if (isInternetConnected) {
+                    viewModel.getRandomRecipes()
+                }
+            }
+        }
     }
 
     // Observer of RandomRecipesState in ViewModel
@@ -77,6 +93,15 @@ class RandomRecipesRVFragment : Fragment() {
                 // Submit new list to adapter
                 rvAdapter.submitList(it.recipes)
             }
+        }
+    }
+
+    private fun checkInternetConnection() {
+        val isInternetConnected = InternetConnection(requireContext()).checkInternetConnection()
+        if (isInternetConnected) {
+            viewModel.handleInternetConnection(isInternetConnected = true)
+        } else {
+            viewModel.handleInternetConnection(isInternetConnected = false)
         }
     }
 }

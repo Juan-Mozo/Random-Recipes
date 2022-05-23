@@ -13,16 +13,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        app:layout_constraintTop_toTopOf="@+id/searchRecipesDivider" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/searchRecipesDivider"
         android:layout_width="wrap_content"
         android:layout_height="136dp"
         android:clickable="false"
         android:cropToPadding="true"
         android:scaleType="fitStart"
         android:src="@drawable/wave_background_search"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

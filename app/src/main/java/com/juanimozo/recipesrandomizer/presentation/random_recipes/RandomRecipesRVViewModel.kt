@@ -1,5 +1,6 @@
 package com.juanimozo.recipesrandomizer.presentation.random_recipes
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.juanimozo.recipesrandomizer.core.util.Resource
@@ -11,21 +12,22 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+private const val TAG = "RandomRecipesRV ViewModel"
+
 @HiltViewModel
-class RandomRecipesViewModel @Inject constructor(
+class RandomRecipesRVViewModel @Inject constructor(
     private val recipeUseCases: RecipeUseCases
 ): ViewModel() {
 
     private val _randomRecipesState = MutableStateFlow(RandomRecipesState(emptyList(), false))
     val randomRecipesState: StateFlow<RandomRecipesState> = _randomRecipesState
 
+    private val _internetConnection = MutableStateFlow(false)
+    val internetConnection: StateFlow<Boolean> = _internetConnection
+
     private var getRandomRecipesJob: Job? = null
 
-    init {
-        getRandomRecipes()
-    }
-
-    private fun getRandomRecipes() {
+    fun getRandomRecipes() {
         getRandomRecipesJob?.cancel()
         getRandomRecipesJob = viewModelScope.launch {
             recipeUseCases.getRandomRecipesUseCase()
@@ -49,12 +51,15 @@ class RandomRecipesViewModel @Inject constructor(
                                 recipes = result.data ?: emptyList(),
                                 isLoading = false
                             )
-                            // ToDo:: -VM- *1* / Priority: M
-                            // Description: Agregar error
+                            Log.e(TAG, "An error occurred while getting random recipes. Result: ${result.data}")
                         }
                     }
 
                 }
         }
+    }
+
+    fun handleInternetConnection(isInternetConnected: Boolean) {
+        _internetConnection.value = isInternetConnected
     }
 }

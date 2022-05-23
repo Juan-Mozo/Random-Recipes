@@ -28,7 +28,7 @@ class SetAnimation(
 
         // Start animation and wait until it finishes
         startAnimation()
-        delay(animation.duration)
+        delay(500)
 
         // Finish Animation and set Icon
         finishAnimation()

@@ -62,7 +62,14 @@ class RecipeDetailsFragment : Fragment() {
         binding.servingsAmount.text = args.recipe.servings.toString()
         binding.readyInAmount.text = args.recipe.readyInMinutes.toString()
         binding.instructionsText.text = args.recipe.instructions
-        binding.pairedWineText.text = args.recipe.pairedWineText
+        val pairedWine = args.recipe.pairedWineText
+        if (pairedWine.isNullOrBlank()) {
+            // When there's not paired wines, hide that section
+            binding.pairedWineText.visibility = View.INVISIBLE
+            binding.pairedWineTitle.visibility = View.INVISIBLE
+        } else {
+            binding.pairedWineText.text = pairedWine
+        }
 
         // Floating Action Button
         binding.likeRecipeButton.setOnClickListener {

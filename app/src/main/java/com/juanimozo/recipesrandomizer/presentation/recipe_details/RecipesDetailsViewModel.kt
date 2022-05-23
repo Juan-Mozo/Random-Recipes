@@ -1,5 +1,6 @@
 package com.juanimozo.recipesrandomizer.presentation.recipe_details
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.juanimozo.recipesrandomizer.core.util.Resource
@@ -13,6 +14,8 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
+private const val TAG = "RandomRecipesRV ViewModel"
 
 @HiltViewModel
 class RecipeDetailsViewModel @Inject constructor(
@@ -66,8 +69,7 @@ class RecipeDetailsViewModel @Inject constructor(
                                 recipes = result.data ?: emptyList(),
                                 isLoading = false
                             )
-                            // ToDo:: -VM- *1* / Priority: M
-                            // Description: Agregar error
+                            Log.e(TAG, "An error occurred while getting similar recipes. Result: ${result.data}")
                         }
                     }
 
@@ -86,8 +88,7 @@ class RecipeDetailsViewModel @Inject constructor(
                         }
                         is Resource.Loading -> {}
                         is Resource.Error -> {
-                            // ToDo:: -VM- *1* / Priority: M
-                            // Description: Agregar error
+                            Log.e(TAG, "An error occurred while getting recipe information. Result: ${result.data}")
                         }
                     }
 

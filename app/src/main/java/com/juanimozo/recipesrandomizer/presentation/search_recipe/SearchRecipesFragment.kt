@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.juanimozo.recipesrandomizer.R
 import com.juanimozo.recipesrandomizer.databinding.FragmentSearchRecipesBinding
+import com.juanimozo.recipesrandomizer.presentation.util.InternetConnection
 import com.juanimozo.recipesrandomizer.presentation.util.SpinnerType
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,20 +34,27 @@ class SearchRecipesFragment : Fragment() {
         SpinnerAdapter().setAdapter(requireContext(), binding.dietSpinner, R.array.diet_array, binding.dietSpinner, viewModel, SpinnerType.Diet())
 
         binding.searchButton.setOnClickListener {
-            // Query written by user
-            val query = binding.searchEditText.text
-            // Filters selected by user
-            val cuisine = viewModel.searchState.value.cuisine
-            val diet = viewModel.searchState.value.diet
 
-            if (query.isBlank()) {
-                Snackbar.make(requireView(), R.string.text_is_blank, Snackbar.LENGTH_SHORT).show()
-            } else {
-                val action = SearchRecipesFragmentDirections.actionSearchRecipesFragmentToSearchRecipesRVFragment(query.toString(), cuisine, diet)
-                findNavController().navigate(action)
+            // Check internet connection
+            val internetConnection = InternetConnection(requireContext()).checkInternetConnection()
+            if (internetConnection) {
+                // If internet connection is available check user input then direct to Recyclerview
+                // Query written by user
+                val query = binding.searchEditText.text
+                // Filters selected by user
+                val cuisine = viewModel.searchState.value.cuisine
+                val diet = viewModel.searchState.value.diet
+                // Check user input
+                if (query.isBlank()) {
+                    // Inform the user that text is blank
+                    Snackbar.make(requireView(), R.string.text_is_blank, Snackbar.LENGTH_SHORT).show()
+                } else {
+                    // Direct to Recyclerview
+                    val action = SearchRecipesFragmentDirections.actionSearchRecipesFragmentToSearchRecipesRVFragment(query.toString(), cuisine, diet)
+                    findNavController().navigate(action)
+                }
             }
         }
-
         return binding.root
     }
 

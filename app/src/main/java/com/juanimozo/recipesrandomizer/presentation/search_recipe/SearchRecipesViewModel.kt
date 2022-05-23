@@ -3,6 +3,7 @@ package com.juanimozo.recipesrandomizer.presentation.search_recipe
 import androidx.lifecycle.ViewModel
 import com.juanimozo.recipesrandomizer.presentation.search_recipe.state.SearchState
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 

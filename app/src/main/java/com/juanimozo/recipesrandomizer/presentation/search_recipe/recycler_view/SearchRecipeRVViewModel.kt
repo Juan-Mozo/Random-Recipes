@@ -1,5 +1,6 @@
 package com.juanimozo.recipesrandomizer.presentation.search_recipe.recycler_view
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.juanimozo.recipesrandomizer.core.util.Resource
@@ -13,6 +14,8 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+private const val TAG = "SearchRecipeRV ViewModel"
+
 @HiltViewModel
 class SearchRecipeRVViewModel @Inject constructor(
     private val recipeUseCases: RecipeUseCases
@@ -23,6 +26,9 @@ class SearchRecipeRVViewModel @Inject constructor(
 
     private val _newRecipe = MutableSharedFlow<Recipe>()
     val newRecipe = _newRecipe.asSharedFlow()
+
+    private val _internetConnection = MutableStateFlow(false)
+    val internetConnection: StateFlow<Boolean> = _internetConnection
 
     private var searchRecipeJob: Job? = null
     private var getRecipeInfoJob: Job? = null
@@ -47,12 +53,17 @@ class SearchRecipeRVViewModel @Inject constructor(
                         is Resource.Loading -> {
                             _searchRecipeState.value = searchRecipeState.value.copy(
                                 recipes = result.data ?: emptyList(),
-                                isLoading = true
+                                isLoading = true,
+                                areRecipesLoaded = false
                             )
                         }
                         is Resource.Error -> {
-                            // ToDo:: -VM- *1* / Priority: M
-                            // Description: Agregar error
+                            _searchRecipeState.value = searchRecipeState.value.copy(
+                                recipes = result.data ?: emptyList(),
+                                isLoading = false,
+                                areRecipesLoaded = false
+                            )
+                            Log.e(TAG, "An error occurred while loading search recipes. Result: ${result.data}")
                         }
                     }
                 }
@@ -70,13 +81,16 @@ class SearchRecipeRVViewModel @Inject constructor(
                         }
                         is Resource.Loading -> {}
                         is Resource.Error -> {
-                            // ToDo:: -VM- *1* / Priority: M
-                            // Description: Agregar error
+                            Log.e(TAG, "An error occurred while getting recipe information. Result: ${result.data}")
                         }
                     }
 
                 }
         }
+    }
+
+    fun handleInternetConnection(isInternetConnected: Boolean) {
+        _internetConnection.value = isInternetConnected
     }
 
 }

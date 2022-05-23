@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.juanimozo.recipesrandomizer.R
 import com.juanimozo.recipesrandomizer.databinding.FragmentSearchRecipesRvBinding
 import com.juanimozo.recipesrandomizer.presentation.search_recipe.SearchRecipesAdapter
+import com.juanimozo.recipesrandomizer.presentation.util.InternetConnection
 import com.juanimozo.recipesrandomizer.presentation.util.SetAnimation
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -34,23 +35,19 @@ class SearchRecipesRVFragment : Fragment() {
     ): View? {
         _binding = FragmentSearchRecipesRvBinding.inflate(inflater, container, false)
 
-        val loadingAnimation = SetAnimation(binding.loadingFoodAnimation, R.raw.start_animation)
+        // Internet Connection
+        checkInternetConnection()
+        observeInternetConnection()
 
-        // Make call to bring list of results
-        viewModel.searchRecipes(
-            query = args.query,
-            cuisine = args.cuisine,
-            diet = args.diet
-        )
+        val loadingAnimation = SetAnimation(binding.loadingFoodAnimation, R.raw.start_animation)
 
         val recyclerView = binding.searchRecipesRV
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         val recyclerViewAdapter = SearchRecipesAdapter {
-
+            // When the user select a recipe, get the information and navigate to recipe details
             viewModel.getRecipeInformation(it.id)
             observeNewRecipeState()
-
         }
         recyclerView.adapter = recyclerViewAdapter
 
@@ -58,8 +55,10 @@ class SearchRecipesRVFragment : Fragment() {
         if(!viewModel.searchRecipeState.value.areRecipesLoaded) {
             observeState(recyclerViewAdapter, loadingAnimation)
         } else {
+            // When recipes are loaded submit the list and hide animation
             recyclerViewAdapter.submitList(viewModel.searchRecipeState.value.recipes)
             binding.loadingFoodAnimation.visibility = View.GONE
+            binding.searchRecipesDivider.visibility = View.VISIBLE
         }
 
         return binding.root
@@ -87,6 +86,21 @@ class SearchRecipesRVFragment : Fragment() {
         }
     }
 
+    private fun observeInternetConnection() {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.internetConnection.collect { isInternetConnected ->
+                if (isInternetConnected) {
+                    // Make call to bring list of results
+                    viewModel.searchRecipes(
+                        query = args.query,
+                        cuisine = args.cuisine,
+                        diet = args.diet
+                    )
+                }
+            }
+        }
+    }
+
     private fun observeNewRecipeState() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.newRecipe.collect {
@@ -96,6 +110,15 @@ class SearchRecipesRVFragment : Fragment() {
                 )
                 findNavController().navigate(action)
             }
+        }
+    }
+
+    private fun checkInternetConnection() {
+        val isInternetConnected = InternetConnection(requireContext()).checkInternetConnection()
+        if (isInternetConnected) {
+            viewModel.handleInternetConnection(isInternetConnected = true)
+        } else {
+            viewModel.handleInternetConnection(isInternetConnected = false)
         }
     }
 

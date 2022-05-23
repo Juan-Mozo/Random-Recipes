@@ -33,11 +33,6 @@ class AllSavedRecipesViewModel @Inject constructor(
         getSavedRecipesJob = viewModelScope.launch {
             recipeUseCases.getSavedRecipesUseCase(RecipeFilter.AllRecipes())
                 .collect { result ->
-                    if (result.isNullOrEmpty()) {
-                        Log.d("AllSavedRecipesViewModel", "empty")
-                    } else {
-                        Log.d("AllSavedRecipesViewModel", "get all recipes: ${result[0].title}")
-                    }
                     _allRecipesState.value = allRecipesState.value.copy(
                         recipes = result,
                         isLoading = false,

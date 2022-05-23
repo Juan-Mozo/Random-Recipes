@@ -9,8 +9,8 @@
 
     <!-- TextView -->
     <dimen name="h1">25sp</dimen>
-    <dimen name="subtitle_1">18sp</dimen>
-    <dimen name="paragraph">16sp</dimen>
+    <dimen name="subtitle_1">20sp</dimen>
+    <dimen name="paragraph">18sp</dimen>
 
     <!-- recipe_details Icons -->
     <dimen name="icon_size">40dp</dimen>

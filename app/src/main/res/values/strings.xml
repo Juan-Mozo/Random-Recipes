@@ -8,6 +8,7 @@
     <string name="text_not_found">Not Found</string>
     <string name="text_is_blank">Enter a valid text</string>
     <string name="nn">N/N</string>
+    <string name="no_internet_connection">No internet connection, please verify your connectivity</string>
 
     <!-- random_recipes.xml -->
     <string name="generate_title_1">Generate random</string>
