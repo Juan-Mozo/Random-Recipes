@@ -31,6 +31,9 @@ class RecipeDetailsViewModel @Inject constructor(
     private val _isRecipeFavorite = MutableStateFlow(false)
     val isRecipeFavorite = _isRecipeFavorite.asStateFlow()
 
+    private val _internetConnection = MutableStateFlow(false)
+    val internetConnection: StateFlow<Boolean> = _internetConnection
+
     private var checkLikedRecipeJob: Job? = null
     private var getSimilarRecipesJob: Job? = null
     private var getRecipeInfoJob: Job? = null
@@ -115,6 +118,10 @@ class RecipeDetailsViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun handleInternetConnection(isInternetConnected: Boolean) {
+        _internetConnection.value = isInternetConnected
     }
 
 }

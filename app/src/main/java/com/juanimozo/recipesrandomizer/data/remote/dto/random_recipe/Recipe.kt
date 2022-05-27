@@ -1,5 +1,6 @@
 package com.juanimozo.recipesrandomizer.data.remote.dto.random_recipe
 
+import com.juanimozo.recipesrandomizer.data.util.StringConfig
 import com.juanimozo.recipesrandomizer.domain.model.Recipe
 
 data class Recipe(
@@ -44,7 +45,7 @@ data class Recipe(
             id = id,
             title = title,
             image = image,
-            instructions = instructions,
+            instructions = StringConfig().replaceHTMLTags(instructions),
             servings = servings,
             readyInMinutes = readyInMinutes,
             extendedIngredients = extendedIngredients.map { it.toInformationExtendedIngredient() },

@@ -213,153 +213,237 @@
                 tools:text="1. Cut and discard the end tip of each chiken wing. Cut remaining pieces in half at the joint to create 2 pieces. Rinse pieces under cold water and set to dry for at least 10 minutes." />
 
             <TextView
-                android:id="@+id/cheapText"
+                android:id="@+id/informationTitle"
+                style="@style/S1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/cheap"
-                android:textAppearance="@style/P1"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/cheapIcon"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.4"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/information"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/cheapIcon" />
+                app:layout_constraintTop_toBottomOf="@+id/instructionsText" />
 
-            <TextView
-                android:id="@+id/cheapTextBoolean"
-                android:layout_width="wrap_content"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cheapInformationCard"
+                android:layout_width="@dimen/information_car_width"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="@string/yes"
-                android:textAppearance="@style/P2"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/cheapIcon"
-                app:layout_constraintStart_toEndOf="@+id/cheapText"
-                app:layout_constraintTop_toTopOf="@+id/cheapIcon" />
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/light_salmon"
+                app:cardCornerRadius="15dp"
+                app:contentPadding="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/informationTitle">
 
-            <ImageView
-                android:id="@+id/cheapIcon"
-                android:layout_width="@dimen/icon_size"
-                android:layout_height="@dimen/icon_size"
-                android:layout_marginStart="16dp"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/cheapIcon"
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
+                        android:src="@drawable/cheap"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/cheap" />
+
+                    <TextView
+                        android:id="@+id/cheapText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cheap"
+                        android:textAppearance="@style/P1"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toTopOf="@+id/cheapTextBoolean"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/cheapIcon" />
+
+                    <TextView
+                        android:id="@+id/cheapTextBoolean"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/yes"
+                        android:textAppearance="@style/P2"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/glutenInformationCard"
+                android:layout_width="@dimen/information_car_width"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="36dp"
+                android:backgroundTint="@color/light_salmon"
+                app:cardCornerRadius="15dp"
+                app:contentPadding="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/cheapInformationCard"
+                app:layout_constraintStart_toEndOf="@+id/cheapInformationCard"
+                app:layout_constraintTop_toTopOf="@+id/cheapInformationCard">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/glutenFreeIcon"
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
+                        android:src="@drawable/gluten_free"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/gluten_free" />
+
+                    <TextView
+                        android:id="@+id/glutenFreeText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gluten_free"
+                        android:textAppearance="@style/P1"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toTopOf="@+id/glutenFreeTextBoolean"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/glutenFreeIcon" />
+
+                    <TextView
+                        android:id="@+id/glutenFreeTextBoolean"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/yes"
+                        android:textAppearance="@style/P2"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/veganInformationCard"
+                android:layout_width="@dimen/information_car_width"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:src="@drawable/cheap"
-                app:layout_constraintStart_toEndOf="@+id/cheapTextBoolean"
-                app:layout_constraintTop_toBottomOf="@+id/instructionsText"
-                app:srcCompat="@drawable/cheap" />
+                android:backgroundTint="@color/light_salmon"
+                app:cardCornerRadius="15dp"
+                app:contentPadding="8dp"
+                app:layout_constraintStart_toStartOf="@+id/cheapInformationCard"
+                app:layout_constraintTop_toBottomOf="@+id/cheapInformationCard">
 
-            <TextView
-                android:id="@+id/veganText"
-                android:layout_width="wrap_content"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/veganIcon"
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
+                        android:src="@drawable/vegan"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/vegan" />
+
+                    <TextView
+                        android:id="@+id/veganText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/vegan"
+                        android:textAppearance="@style/P1"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toTopOf="@+id/veganTextBoolean"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/veganIcon" />
+
+                    <TextView
+                        android:id="@+id/veganTextBoolean"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/yes"
+                        android:textAppearance="@style/P2"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/vegetarianInformationCard"
+                android:layout_width="@dimen/information_car_width"
                 android:layout_height="wrap_content"
-                android:text="@string/vegan"
-                android:textAppearance="@style/P1"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/veganTextBoolean"
-                app:layout_constraintStart_toStartOf="@+id/cheapText"
-                app:layout_constraintTop_toTopOf="@+id/veganTextBoolean" />
+                android:layout_marginStart="36dp"
+                android:backgroundTint="@color/light_salmon"
+                app:cardCornerRadius="15dp"
+                app:contentPadding="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/veganInformationCard"
+                app:layout_constraintStart_toEndOf="@id/veganInformationCard"
+                app:layout_constraintTop_toTopOf="@+id/veganInformationCard">
 
-            <TextView
-                android:id="@+id/veganTextBoolean"
-                android:layout_width="wrap_content"
-                android:layout_height="22dp"
-                android:layout_marginStart="16dp"
-                android:text="@string/yes"
-                android:textAppearance="@style/P2"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/veganIcon"
-                app:layout_constraintStart_toEndOf="@+id/veganText"
-                app:layout_constraintTop_toTopOf="@+id/veganIcon" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/veganIcon"
-                android:layout_width="@dimen/icon_size"
-                android:layout_height="@dimen/icon_size"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/vegan"
-                app:layout_constraintStart_toEndOf="@+id/veganTextBoolean"
-                app:layout_constraintTop_toBottomOf="@+id/cheapIcon"
-                app:srcCompat="@drawable/vegan" />
+                    <ImageView
+                        android:id="@+id/vegetarianIcon"
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
+                        android:src="@drawable/no_meat"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/no_meat" />
 
-            <TextView
-                android:id="@+id/vegetarianText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/vegetarian"
-                android:textAppearance="@style/P1"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/vegetarianIcon"
-                app:layout_constraintStart_toStartOf="@+id/veganText"
-                app:layout_constraintTop_toTopOf="@+id/vegetarianIcon" />
+                    <TextView
+                        android:id="@+id/vegetarianText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/vegetarian"
+                        android:textAppearance="@style/P1"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toTopOf="@+id/vegetarianTextBoolean"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/vegetarianIcon" />
 
-            <TextView
-                android:id="@+id/vegetarianTextBoolean"
-                android:layout_width="wrap_content"
-                android:layout_height="22dp"
-                android:layout_marginStart="16dp"
-                android:text="@string/yes"
-                android:textAppearance="@style/P2"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/vegetarianText"
-                app:layout_constraintStart_toEndOf="@+id/vegetarianText"
-                app:layout_constraintTop_toTopOf="@+id/vegetarianText" />
+                    <TextView
+                        android:id="@+id/vegetarianTextBoolean"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/yes"
+                        android:textAppearance="@style/P2"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
 
-            <ImageView
-                android:id="@+id/vegetarianIcon"
-                android:layout_width="@dimen/icon_size"
-                android:layout_height="@dimen/icon_size"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/no_meat"
-                app:layout_constraintStart_toEndOf="@+id/vegetarianTextBoolean"
-                app:layout_constraintTop_toBottomOf="@+id/veganIcon"
-                app:srcCompat="@drawable/no_meat" />
-
-            <TextView
-                android:id="@+id/glutenFreeText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/gluten_free"
-                android:textAppearance="@style/P1"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/glutenFreeIcon"
-                app:layout_constraintStart_toStartOf="@+id/vegetarianText"
-                app:layout_constraintTop_toTopOf="@+id/glutenFreeIcon" />
-
-            <TextView
-                android:id="@+id/glutenFreeTextBoolean"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="@string/yes"
-                android:textAppearance="@style/P2"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/glutenFreeText"
-                app:layout_constraintStart_toEndOf="@+id/glutenFreeText"
-                app:layout_constraintTop_toTopOf="@+id/glutenFreeText" />
-
-            <ImageView
-                android:id="@+id/glutenFreeIcon"
-                android:layout_width="@dimen/icon_size"
-                android:layout_height="@dimen/icon_size"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/gluten_free"
-                app:layout_constraintStart_toEndOf="@+id/glutenFreeTextBoolean"
-                app:layout_constraintTop_toBottomOf="@+id/vegetarianIcon"
-                app:srcCompat="@drawable/gluten_free" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
 
             <TextView
                 android:id="@+id/pairedWineTitle"
                 style="@style/S1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginStart="32dp"
                 android:text="@string/pairedWines"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/glutenFreeText" />
+                app:layout_constraintTop_toBottomOf="@+id/veganInformationCard" />
 
             <TextView
                 android:id="@+id/pairedWineText"

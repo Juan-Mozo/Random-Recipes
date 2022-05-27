@@ -3,6 +3,7 @@ package com.juanimozo.recipesrandomizer.data.remote.dto
 import com.juanimozo.recipesrandomizer.data.remote.dto.recipe_information.ExtendedIngredient
 import com.juanimozo.recipesrandomizer.data.remote.dto.recipe_information.WinePairing
 import com.juanimozo.recipesrandomizer.domain.model.Recipe
+import com.juanimozo.recipesrandomizer.data.util.StringConfig
 
 data class RecipeInformationDto(
     val aggregateLikes: Int,
@@ -47,7 +48,7 @@ data class RecipeInformationDto(
             id = id,
             title = title,
             image = image,
-            instructions = instructions,
+            instructions = StringConfig().replaceHTMLTags(instructions),
             servings = servings,
             readyInMinutes = readyInMinutes,
             extendedIngredients = extendedIngredients.map { it.toInformationExtendedIngredient() },

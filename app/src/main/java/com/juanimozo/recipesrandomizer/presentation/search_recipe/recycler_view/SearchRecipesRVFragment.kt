@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.juanimozo.recipesrandomizer.R
 import com.juanimozo.recipesrandomizer.databinding.FragmentSearchRecipesRvBinding
 import com.juanimozo.recipesrandomizer.presentation.search_recipe.SearchRecipesAdapter
@@ -46,7 +47,13 @@ class SearchRecipesRVFragment : Fragment() {
 
         val recyclerViewAdapter = SearchRecipesAdapter {
             // When the user select a recipe, get the information and navigate to recipe details
-            viewModel.getRecipeInformation(it.id)
+            checkInternetConnection()
+            // If there´s internet connection get the selected recipe
+            if (viewModel.internetConnection.value) {
+                viewModel.getRecipeInformation(it.id)
+            } else {
+                Snackbar.make(requireView(), R.string.no_internet_connection, Snackbar.LENGTH_SHORT).show()
+            }
             observeNewRecipeState()
         }
         recyclerView.adapter = recyclerViewAdapter

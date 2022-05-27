@@ -1,6 +1,7 @@
 package com.juanimozo.recipesrandomizer.domain.model
 
 import android.os.Parcelable
+import com.google.gson.JsonParser
 import com.juanimozo.recipesrandomizer.core.util.ConvertBoolean
 import com.juanimozo.recipesrandomizer.data.local.RecipeEntity
 import com.juanimozo.recipesrandomizer.domain.model.extended_ingredient.ExtendedIngredientModel

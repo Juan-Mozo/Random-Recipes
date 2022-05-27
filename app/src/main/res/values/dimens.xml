@@ -32,4 +32,6 @@
     <!-- Recipe Item -->
     <dimen name="item_height">230dp</dimen>
 
+    <dimen name="information_car_width">105dp</dimen>
+
 </resources>

@@ -13,10 +13,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.airbnb.lottie.LottieAnimationView
+import com.google.android.material.snackbar.Snackbar
 import com.juanimozo.recipesrandomizer.R
 import com.juanimozo.recipesrandomizer.databinding.FragmentRecipeDetailsBinding
 import com.juanimozo.recipesrandomizer.domain.model.Recipe
 import com.juanimozo.recipesrandomizer.presentation.recipe_details.state.RecipeDetailsEvent
+import com.juanimozo.recipesrandomizer.presentation.util.InternetConnection
 import com.juanimozo.recipesrandomizer.presentation.util.SetAnimation
 import com.juanimozo.recipesrandomizer.presentation.util.getImage
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,6 +42,10 @@ class RecipeDetailsFragment : Fragment() {
     ): View {
         _binding = FragmentRecipeDetailsBinding.inflate(inflater, container, false)
 
+        // Check internet connection
+        checkInternetConnection()
+        observeInternetConnection()
+
         // Use save_animation as icon in fab
         val likeAnimation = SetAnimation(binding.likeButtonAnimation, R.raw.save_animation)
         val likeAnimationAsIcon = SetAnimation(binding.likeButtonIcon, R.raw.save_animation)
@@ -49,7 +55,11 @@ class RecipeDetailsFragment : Fragment() {
         observeIsRecipeFavorite(likeAnimationAsIcon)
 
         // Bind recipe image
-        if(args.recipe.image != null && args.recipe.image!!.isNotEmpty()) {
+        if (args.recipe.image != null
+            && args.recipe.image!!.isNotEmpty()
+            && viewModel.internetConnection.value
+        ) {
+            // If the url is valid and there's internet connection get the recipe image with picasso
             getImage(
                 url = args.recipe.image!!,
                 view = binding.recipeImage,
@@ -103,15 +113,20 @@ class RecipeDetailsFragment : Fragment() {
         val rvSimilarRecipes = binding.similarRecipesRV
         rvSimilarRecipes.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         val rvSimilarRecipesAdapter = SimilarRecipesAdapter { recipe ->
-            // Get the new recipe
-            viewModel.getRecipeInformation(recipe.id)
+            // If there´s internet connection get the new recipe
+            checkInternetConnection()
+            if (viewModel.internetConnection.value) {
+                // Get the new recipe
+                viewModel.getRecipeInformation(recipe.id)
+            } else {
+                // If internet connections is unavailable inform the user
+                Snackbar.make(requireView(), R.string.no_internet_connection, Snackbar.LENGTH_SHORT).show()
+            }
             // Load the new recipe
             observeNewRecipeState()
         }
         rvSimilarRecipes.adapter = rvSimilarRecipesAdapter
 
-        // Get similar recipes
-        viewModel.getSimilarRecipes(args.recipe.id)
         // Load similar recipes
         observeSimilarRecipesState(rvSimilarRecipesAdapter)
 
@@ -163,6 +178,17 @@ class RecipeDetailsFragment : Fragment() {
         }
     }
 
+    private fun observeInternetConnection() {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.internetConnection.collect { isInternetConnected ->
+                if (isInternetConnected) {
+                    // Get similar recipes
+                    viewModel.getSimilarRecipes(args.recipe.id)
+                }
+            }
+        }
+    }
+
     private fun manageLikeButton(isFavorite: Boolean, recipe: Recipe, view: SetAnimation, icon: LottieAnimationView) {
         // If recipe is not already liked, save it and start animation in FAB
         if (!isFavorite) {
@@ -179,6 +205,15 @@ class RecipeDetailsFragment : Fragment() {
         } else {
             // If recipes is already saved, delete it and change the icon of FAB
             viewModel.onLikedRecipe(RecipeDetailsEvent.UndoFavourite(recipe))
+        }
+    }
+
+    private fun checkInternetConnection() {
+        val isInternetConnected = InternetConnection(requireContext()).checkInternetConnection()
+        if (isInternetConnected) {
+            viewModel.handleInternetConnection(isInternetConnected = true)
+        } else {
+            viewModel.handleInternetConnection(isInternetConnected = false)
         }
     }
 
