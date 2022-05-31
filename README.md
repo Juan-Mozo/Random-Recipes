@@ -5,9 +5,6 @@ Buscando Apis gratuitas para empezar a desarrollar una app para mi portfolio me 
 
 Entonces se me ocurrío la idea de crear **Random Recipes**, una app que te permite generar una lista de recetas aleatorias para cuando no sabes que cocinar. Además te dá la opción de guardar las recetas que más te gusten para verlas más tarde, incluso si no tenes conexión a internet, y la posibilidad de buscar recetas filtradas por cocina internacional (como italiana o japonesa) y por dieta (como vegana o libre de gluten).
 
-
-Built using kotlin with clean architecture, xml and Spoonacular api
-
 ## Screenshots
 ![Screenshot_randomrecipes](https://user-images.githubusercontent.com/89859672/171191303-9dd712ec-5706-417c-a717-3a4834628391.jpg)
 ![Screenshot_recipeslist](https://user-images.githubusercontent.com/89859672/171191374-35b6a8e0-97f0-49ad-abee-e4faeeffc2e3.jpg)
@@ -15,6 +12,10 @@ Built using kotlin with clean architecture, xml and Spoonacular api
 ![Screenshot_recipedetails_2](https://user-images.githubusercontent.com/89859672/171191402-071a08e9-dbb3-41cf-992a-dae38711a843.jpg)
 ![Screenshot_searchrecipes](https://user-images.githubusercontent.com/89859672/171191410-aafde291-b2f6-43df-ba4f-c17395fdf452.jpg)
 ![Screenshot_savedrecipes](https://user-images.githubusercontent.com/89859672/171191420-85fcf2d5-5c3a-4e40-8665-565474a1fc20.jpg)
+
+## ARCHITECTURE
+- MVVM
+- Clean Architecture
 
 ## Librarias
 - Dagger-Hilt
