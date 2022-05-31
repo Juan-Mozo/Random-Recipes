@@ -17,7 +17,7 @@ interface SpoonacularApi {
         @Path("id") id: Int
     ): RecipeInformationDto
 
-    // Get 10 random recipes
+    // Get 20 random recipes
     @GET("random?apiKey=4a64dafdf3b74e4fb0f27ced23b2ca16&number=20")
     suspend fun getRandomRecipes(): RandomRecipesDto
 
@@ -29,7 +29,7 @@ interface SpoonacularApi {
         @Query("diet") diet: String
     ): SearchRecipeDto
 
-    // Get list of 5 recipes that are similar to the current recipe
+    // Get a list of 5 recipes that are similar to the current recipe
     @GET("{id}/similar?apiKey=4a64dafdf3b74e4fb0f27ced23b2ca16&number=5")
     suspend fun getSimilarRecipes(
         @Path("id") id: Int

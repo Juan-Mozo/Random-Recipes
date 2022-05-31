@@ -38,34 +38,34 @@ class SavedRecipesFragment : Fragment() {
         // Get saved recipes
         viewModel.getSavedRecipes()
 
-        // Navigate to AllSavedRecipes when clicking cardView
+        // Navigate to AllSavedRecipes when user clicks cardView
         binding.allRecipesCardView.setOnClickListener {
             val action = SavedRecipesFragmentDirections.actionSavedRecipesFragmentToAllSavedRecipesFragment()
             findNavController().navigate(action)
         }
 
-        // Quick recipes RecyclerView
+        // Set Quick recipes RecyclerView
         val rvQuickRecipes = binding.readyInRV
         val quickRecipesAdapter = SavedRecipesAdapter { recipe ->
             navigateToDetailsFragment(recipe)
         }
         concatAdapters(rvQuickRecipes, SavedRecipesHeaderAdapter(RecipeFilter.QuickRecipes()), quickRecipesAdapter)
 
-        // Cheap recipes RecyclerView
+        // Set Cheap recipes RecyclerView
         val rvCheapRecipes = binding.cheapRecipesRV
         val cheapRecipesAdapter = SavedRecipesAdapter { recipe ->
             navigateToDetailsFragment(recipe)
         }
         concatAdapters(rvCheapRecipes, SavedRecipesHeaderAdapter(RecipeFilter.CheapRecipes()), cheapRecipesAdapter)
 
-        // Vegan recipes RecyclerView
+        // Set Vegan recipes RecyclerView
         val rvVeganRecipes = binding.veganRecipesRV
         val veganRecipesAdapter = SavedRecipesAdapter { recipe ->
             navigateToDetailsFragment(recipe)
         }
         concatAdapters(rvVeganRecipes, SavedRecipesHeaderAdapter(RecipeFilter.VeganRecipes()), veganRecipesAdapter)
 
-        // Healthy recipes RecyclerView
+        // Set Healthy recipes RecyclerView
         val rvHealthyRecipes = binding.healthyRecipesRV
         val healthyRecipesAdapter = SavedRecipesAdapter { recipe ->
             navigateToDetailsFragment(recipe)
@@ -91,9 +91,7 @@ class SavedRecipesFragment : Fragment() {
         _binding = null
     }
 
-
-
-    // Concat a RV header with the recipe list
+    // Concatenate a RV header with the recipe list
     private fun concatAdapters(
         view: RecyclerView,
         headerAdapter: SavedRecipesHeaderAdapter,

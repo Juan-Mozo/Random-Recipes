@@ -33,11 +33,8 @@ class SearchRecipeRVViewModel @Inject constructor(
     private var searchRecipeJob: Job? = null
     private var getRecipeInfoJob: Job? = null
 
-    fun searchRecipes(
-        query: String,
-        cuisine: String,
-        diet: String
-    ) {
+    // Search 10 recipes sort by popularity, with cuisine and diet as parameters
+    fun searchRecipes(query: String, cuisine: String, diet: String) {
         searchRecipeJob?.cancel()
         searchRecipeJob = viewModelScope.launch {
             recipeUseCases.searchRecipeUseCase(query, cuisine, diet)
@@ -70,6 +67,7 @@ class SearchRecipeRVViewModel @Inject constructor(
         }
     }
 
+    // Get complete information of recipe by id
     fun getRecipeInformation(id: Int) {
         getRecipeInfoJob?.cancel()
         getRecipeInfoJob = viewModelScope.launch {
@@ -89,6 +87,7 @@ class SearchRecipeRVViewModel @Inject constructor(
         }
     }
 
+    // Update internet connection state
     fun handleInternetConnection(isInternetConnected: Boolean) {
         _internetConnection.value = isInternetConnected
     }

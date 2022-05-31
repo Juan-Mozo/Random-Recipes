@@ -40,11 +40,13 @@ class SearchRecipesRVFragment : Fragment() {
         checkInternetConnection()
         observeInternetConnection()
 
+        // Create a loading animation for the fragment
         val loadingAnimation = SetAnimation(binding.loadingFoodAnimation, R.raw.start_animation)
 
+        // Set RecyclerView
         val recyclerView = binding.searchRecipesRV
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
+        // Set Adapter
         val recyclerViewAdapter = SearchRecipesAdapter {
             // When the user select a recipe, get the information and navigate to recipe details
             checkInternetConnection()
@@ -58,14 +60,17 @@ class SearchRecipesRVFragment : Fragment() {
         }
         recyclerView.adapter = recyclerViewAdapter
 
-        // Only start animation when there are no recipes loaded in viewModel
-        if(!viewModel.searchRecipeState.value.areRecipesLoaded) {
-            observeState(recyclerViewAdapter, loadingAnimation)
-        } else {
-            // When recipes are loaded submit the list and hide animation
+        // Check if the list of recipes is loaded
+        if(viewModel.searchRecipeState.value.areRecipesLoaded) {
+            // Submit the current recipe list to adapter
             recyclerViewAdapter.submitList(viewModel.searchRecipeState.value.recipes)
+            // Finish animation
             binding.loadingFoodAnimation.visibility = View.GONE
+            // Show divider on top of the screen
             binding.searchRecipesDivider.visibility = View.VISIBLE
+        } else {
+            // Handle loading animation and get new recipes
+            observeState(recyclerViewAdapter, loadingAnimation)
         }
 
         return binding.root
@@ -76,34 +81,39 @@ class SearchRecipesRVFragment : Fragment() {
         _binding = null
     }
 
-    // Observer of RandomRecipesState in ViewModel
-    private fun observeState(rvAdapter: SearchRecipesAdapter, animation: SetAnimation) {
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.searchRecipeState.collect {
-                // Start loading animation
-                animation.startAnimation()
-                delay(animation.animation.duration)
-                // Stop and hide animation when isLoading = False
-                if (it.areRecipesLoaded) {
-                    animation.finishAnimation()
-                }
-                // Submit new list to adapter
-                rvAdapter.submitList(it.recipes)
-            }
-        }
-    }
-
+    // Observer of InternetConnection State in ViewModel
     private fun observeInternetConnection() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.internetConnection.collect { isInternetConnected ->
                 if (isInternetConnected) {
-                    // Make call to bring list of results
+                    // If internet connection is active then make api call to get recipes
                     viewModel.searchRecipes(
                         query = args.query,
                         cuisine = args.cuisine,
                         diet = args.diet
                     )
                 }
+            }
+        }
+    }
+
+    // Observer of RandomRecipesState in ViewModel
+    private fun observeState(rvAdapter: SearchRecipesAdapter, animation: SetAnimation) {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.searchRecipeState.collect {
+                // Start loading animation
+                animation.startAnimation()
+                // Give time to show animation
+                delay(animation.animation.duration)
+                // Check whether the recipes loaded successfully
+                if (it.areRecipesLoaded) {
+                    // Stop and hide animation
+                    animation.finishAnimation()
+                }
+                // Submit the new list with recipes loaded to adapter
+                rvAdapter.submitList(it.recipes)
+                // Show divider on top of the screen
+                binding.searchRecipesDivider.visibility = View.VISIBLE
             }
         }
     }
@@ -120,11 +130,14 @@ class SearchRecipesRVFragment : Fragment() {
         }
     }
 
+    // Check status of internet connection and upgrade InternetConnection State in ViewModel
     private fun checkInternetConnection() {
         val isInternetConnected = InternetConnection(requireContext()).checkInternetConnection()
         if (isInternetConnected) {
+            // Set internet connection status to true
             viewModel.handleInternetConnection(isInternetConnected = true)
         } else {
+            // Set internet connection status to false
             viewModel.handleInternetConnection(isInternetConnected = false)
         }
     }

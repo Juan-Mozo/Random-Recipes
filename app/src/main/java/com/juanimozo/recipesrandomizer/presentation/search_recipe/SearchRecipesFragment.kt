@@ -28,13 +28,13 @@ class SearchRecipesFragment : Fragment() {
     ): View? {
         _binding = FragmentSearchRecipesBinding.inflate(inflater, container, false)
 
-        // Cuisine Spinner
+        // Set Cuisine Spinner
         SpinnerAdapter().setAdapter(requireContext(), binding.cuisineSpinner, R.array.cuisine_array, binding.cuisineSpinner, viewModel, SpinnerType.Cuisine())
-        // Diet Spinner
+        // Set Diet Spinner
         SpinnerAdapter().setAdapter(requireContext(), binding.dietSpinner, R.array.diet_array, binding.dietSpinner, viewModel, SpinnerType.Diet())
 
+        // Bind Search Button
         binding.searchButton.setOnClickListener {
-
             // Check internet connection
             val internetConnection = InternetConnection(requireContext()).checkInternetConnection()
             if (internetConnection) {

@@ -21,7 +21,7 @@ class RecipesListViewHolder(
 
     fun bind(item: Recipe) {
         recipeTitle.text = item.title
-        if(item.image != null) {
+        if (item.image != null) {
             getImage(
                 url = item.image,
                 view = recipeImage,

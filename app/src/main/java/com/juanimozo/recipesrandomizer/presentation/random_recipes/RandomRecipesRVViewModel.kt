@@ -27,6 +27,7 @@ class RandomRecipesRVViewModel @Inject constructor(
 
     private var getRandomRecipesJob: Job? = null
 
+    // Get 20 random recipes from API
     fun getRandomRecipes() {
         getRandomRecipesJob?.cancel()
         getRandomRecipesJob = viewModelScope.launch {
@@ -59,6 +60,7 @@ class RandomRecipesRVViewModel @Inject constructor(
         }
     }
 
+    // Update internet connection status
     fun handleInternetConnection(isInternetConnected: Boolean) {
         _internetConnection.value = isInternetConnected
     }

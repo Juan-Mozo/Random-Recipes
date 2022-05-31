@@ -42,10 +42,8 @@ class SavedRecipesViewModel @Inject constructor(
         }
     }
 
-    private fun manageResult(
-        result: List<Recipe>,
-        filter: RecipeFilter
-    ) {
+    private fun manageResult(result: List<Recipe>, filter: RecipeFilter) {
+        // Update result by filter
         when (filter) {
             is RecipeFilter.CheapRecipes -> {
                 _savedRecipesState.value = savedRecipesState.value.copy(

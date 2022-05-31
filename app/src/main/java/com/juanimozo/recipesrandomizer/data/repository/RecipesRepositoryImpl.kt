@@ -23,7 +23,6 @@ class RecipesRepositoryImpl @Inject constructor(
     // API
     override fun getRecipeInfo(id: Int): Flow<Resource<Recipe>> = flow {
         emit(Resource.Loading())
-
         try {
             val recipeInfo = api.getRecipeInformation(id).toRecipeEntity()
             emit(Resource.Success(data = recipeInfo))
@@ -32,9 +31,9 @@ class RecipesRepositoryImpl @Inject constructor(
         }
     }
 
+    // Get 20 random recipes from API
     override fun getRandomRecipes(): Flow<Resource<List<Recipe>>> = flow {
         emit(Resource.Loading())
-
         try {
             val randomRecipes = api.getRandomRecipes().recipes.map { it.toRecipe() }
             emit(Resource.Success(data = randomRecipes))

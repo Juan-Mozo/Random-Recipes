@@ -9,6 +9,7 @@ class GetSimilarRecipesUseCase(
     private val repository: RecipesRepository
 ) {
     operator fun invoke(id: Int): Flow<Resource<List<SimilarResults>>> {
+        // Get a list of 5 recipes that are similar to the current recipe
         return repository.getSimilarRecipes(id)
     }
 }

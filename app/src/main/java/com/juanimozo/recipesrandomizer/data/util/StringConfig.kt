@@ -8,11 +8,10 @@ class StringConfig {
             .replace("<ol>", "", true)
             .replace("</ol>", "", true)
             // Replace <li> tags
-            .replace("<li>", "- ", true)
-            .replace("</li>", "<" +
-                    ">", true)
+            .replace("<li>", "\t - ", true)
+            .replace("</li>", " \n", true)
             // Replace <p> tags
-            .replace("<p>", "- ")
+            .replace("<p>", "")
             .replace("</p>", "")
     }
 }

@@ -39,6 +39,7 @@ class RecipeDetailsViewModel @Inject constructor(
     private var getRecipeInfoJob: Job? = null
     private var likeRecipeJob: Job? = null
 
+    // Check if the current recipe is already saved in the ROOM database
     fun checkLikedRecipe(id: Int) {
         checkLikedRecipeJob?.cancel()
         checkLikedRecipeJob = viewModelScope.launch {
@@ -49,6 +50,7 @@ class RecipeDetailsViewModel @Inject constructor(
         }
     }
 
+    // Get a list of 5 recipes that are similar to the current recipe
     fun getSimilarRecipes(id: Int) {
         getSimilarRecipesJob?.cancel()
         getSimilarRecipesJob = viewModelScope.launch {
@@ -80,6 +82,7 @@ class RecipeDetailsViewModel @Inject constructor(
         }
     }
 
+    // Load a new recipe
     fun getRecipeInformation(id: Int) {
         getRecipeInfoJob?.cancel()
         getRecipeInfoJob = viewModelScope.launch {
@@ -99,10 +102,12 @@ class RecipeDetailsViewModel @Inject constructor(
         }
     }
 
+    // Handle user interaction with like button
     fun onLikedRecipe(
         event: RecipeDetailsEvent
     ) {
         when (event) {
+            // Save recipe in ROOM database
             is RecipeDetailsEvent.MakeFavourite -> {
                 likeRecipeJob?.cancel()
                 likeRecipeJob = viewModelScope.launch {
@@ -110,6 +115,7 @@ class RecipeDetailsViewModel @Inject constructor(
                     _isRecipeFavorite.value = true
                 }
             }
+            // Delete recipe from ROOM database
             is RecipeDetailsEvent.UndoFavourite -> {
                 likeRecipeJob?.cancel()
                 likeRecipeJob = viewModelScope.launch {
@@ -120,6 +126,7 @@ class RecipeDetailsViewModel @Inject constructor(
         }
     }
 
+    // Update internet connection state
     fun handleInternetConnection(isInternetConnected: Boolean) {
         _internetConnection.value = isInternetConnected
     }

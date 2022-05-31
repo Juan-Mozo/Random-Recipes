@@ -8,9 +8,8 @@ import kotlinx.coroutines.flow.Flow
 class GetRecipeInfoUseCase(
     private val repository: RecipesRepository
 ) {
-    operator fun invoke(
-        id: Int
-    ): Flow<Resource<Recipe>> {
+    operator fun invoke(id: Int): Flow<Resource<Recipe>> {
+        // Get complete information of recipe by id
         return repository.getRecipeInfo(id)
     }
 }

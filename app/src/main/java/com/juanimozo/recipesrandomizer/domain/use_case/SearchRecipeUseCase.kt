@@ -10,10 +10,8 @@ import kotlinx.coroutines.flow.flow
 class SearchRecipeUseCase(
     private val repository: RecipesRepository
 ) {
-    operator fun invoke(
-        query: String,
-        cuisine: String,
-        diet: String,
+    // Search 10 recipes sort by popularity, with cuisine and diet as parameters
+    operator fun invoke(query: String, cuisine: String, diet: String,
     ): Flow<Resource<List<Result>>> {
         if (query.isBlank()) {
             return flow {  }

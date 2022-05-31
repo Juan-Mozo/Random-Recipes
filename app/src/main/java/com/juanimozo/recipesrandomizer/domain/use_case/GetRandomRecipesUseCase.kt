@@ -9,6 +9,7 @@ class GetRandomRecipesUseCase(
     private val repository: RecipesRepository
 ) {
     operator fun invoke(): Flow<Resource<List<Recipe>>> {
+        // Get 20 random recipes from API
         return repository.getRandomRecipes()
     }
 }

@@ -1,9 +1,7 @@
 package com.juanimozo.recipesrandomizer.presentation.saved_recipes.all_saved_recipes
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.juanimozo.recipesrandomizer.core.util.Resource
 import com.juanimozo.recipesrandomizer.domain.use_case.RecipeUseCases
 import com.juanimozo.recipesrandomizer.presentation.saved_recipes.RecipeFilter
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -28,6 +26,7 @@ class AllSavedRecipesViewModel @Inject constructor(
         getSavedRecipes()
     }
 
+    // Get all saved recipes
     private fun getSavedRecipes() {
         getSavedRecipesJob?.cancel()
         getSavedRecipesJob = viewModelScope.launch {

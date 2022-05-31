@@ -31,11 +31,11 @@ class AllSavedRecipesFragment : Fragment() {
     ): View {
         _binding = FragmentAllSavedRecipesBinding.inflate(inflater, container, false)
 
+        // Set RecyclerView
         val recyclerView = binding.allSavedRecipesRV
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
+        // Set Adapter
         val recyclerViewAdapter = RecipesAdapter { recipe ->
-
             // Navigate to RecipeDetailsFragment
             val action = AllSavedRecipesFragmentDirections.actionAllSavedRecipesFragmentToRecipeDetails(
                 recipe = recipe
@@ -49,9 +49,9 @@ class AllSavedRecipesFragment : Fragment() {
             // Observe RandomRecipesState
             observeState(recyclerViewAdapter)
         } else {
+            // Submit current list to adapter
             recyclerViewAdapter.submitList(viewModel.allRecipesState.value.recipes)
         }
-
 
         return binding.root
     }
@@ -61,6 +61,7 @@ class AllSavedRecipesFragment : Fragment() {
         _binding = null
     }
 
+    // Observe SavedRecipes state
     private fun observeState(rvAdapter: RecipesAdapter) {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.allRecipesState.collect {
