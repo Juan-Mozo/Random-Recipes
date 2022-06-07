@@ -12,17 +12,17 @@ import retrofit2.http.Query
 interface SpoonacularApi {
 
     // Get complete information of recipe by id
-    @GET("{id}/information?apiKey=4a64dafdf3b74e4fb0f27ced23b2ca16&includeNutrition=false")
+    @GET("{id}/information?apiKey=$API_KEY&includeNutrition=false")
     suspend fun getRecipeInformation(
         @Path("id") id: Int
     ): RecipeInformationDto
 
     // Get 20 random recipes
-    @GET("random?apiKey=4a64dafdf3b74e4fb0f27ced23b2ca16&number=20")
+    @GET("random?apiKey=$API_KEY&number=20")
     suspend fun getRandomRecipes(): RandomRecipesDto
 
     // Search 10 recipes sort by popularity, with cuisine and diet as parameters
-    @GET("complexSearch?apiKey=4a64dafdf3b74e4fb0f27ced23b2ca16&number=40&sort=popularity")
+    @GET("complexSearch?apiKey=$API_KEY&number=40&sort=popularity")
     suspend fun searchRecipe(
         @Query("query") query: String,
         @Query("cuisine") cuisine: String,
@@ -30,7 +30,7 @@ interface SpoonacularApi {
     ): SearchRecipeDto
 
     // Get a list of 5 recipes that are similar to the current recipe
-    @GET("{id}/similar?apiKey=4a64dafdf3b74e4fb0f27ced23b2ca16&number=5")
+    @GET("{id}/similar?apiKey=$API_KEY&number=5")
     suspend fun getSimilarRecipes(
         @Path("id") id: Int
     ): SimilarRecipesDto

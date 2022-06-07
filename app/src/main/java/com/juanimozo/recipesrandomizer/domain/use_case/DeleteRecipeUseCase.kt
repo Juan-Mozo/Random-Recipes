@@ -9,7 +9,6 @@ class DeleteRecipeUseCase(
     private val repository: RecipesRepository
 ) {
     suspend operator fun invoke(id: Int) {
-        Log.d("DeleteRecipeUseCase", "Recipe Deleted id: $id")
         return repository.deleteRecipe(id)
     }
 }
