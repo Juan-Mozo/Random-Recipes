@@ -13,11 +13,11 @@ Entonces se me ocurrío la idea de crear **Random Recipes**, una app que te perm
 ![Screenshot_searchrecipes](https://user-images.githubusercontent.com/89859672/171191410-aafde291-b2f6-43df-ba4f-c17395fdf452.jpg)
 ![Screenshot_savedrecipes](https://user-images.githubusercontent.com/89859672/171191420-85fcf2d5-5c3a-4e40-8665-565474a1fc20.jpg)
 
-## ARCHITECTURE
+## Arquitectura
 - MVVM
 - Clean Architecture
 
-## Librarias
+## Librerias
 - Dagger-Hilt
 - Coroutines
 - Retrofit
@@ -25,9 +25,22 @@ Entonces se me ocurrío la idea de crear **Random Recipes**, una app que te perm
 - Picasso
 - Lottie
 
-## To-Do
-- Improve ingredient units presentation.
-- Hide Api key
+## Instalación
+Clonar el repositorio desde Git Bash con
+```
+$ git clone https://github.com/Juan-Mozo/Random-Recipes.git
+```
+O descargar el proyecto en formato zip desde la página principal del repositorio
+
+La Api Key está oculta, por lo que para hacer funcionar la app deberá generar una key desde [Spoonacular](https://spoonacular.com/food-api/console#Profile)
+y reemplazar API_KEY al final del archivo por tu key generada en:
+```
+app/src/main/java/com/juanimozo/recipesrandomizer/data/remote/SpoonacularApi.kt
+```
+Ejemplo:
+```
+const val API_KEY = "65dma24d242648ecc66387ecc87dae0a"
+```
 
 ## Acknowledgements
 Bottom navigation icons created by [Freepik](https://www.freepik.com/)
