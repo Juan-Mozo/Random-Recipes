@@ -42,5 +42,8 @@ Ejemplo:
 const val API_KEY = "65dma24d242648ecc66387ecc87dae0a"
 ```
 
+## To-Do
+- Modularización
+
 ## Acknowledgements
 Bottom navigation icons created by [Freepik](https://www.freepik.com/)
