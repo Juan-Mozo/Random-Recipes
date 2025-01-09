@@ -1,9 +1,9 @@
 # Random Recipes
-En mi casa, casi todos los días, aparecía el famoso problema: *¿Que hacemos de comer hoy?* :neutral_face:, seguido por una ola de mal humor provocada por el estrés de no saber que cocinar para una familia completa.
+En mi casa, casi todos los días aparecía el famoso problema: *¿Que hacemos de comer hoy?* :neutral_face:, seguido por una ola de mal humor provocada por el estrés de no saber que cocinar para una familia completa.
 
 Buscando Apis gratuitas para empezar a desarrollar una app para mi portfolio me encontré con Spoonacular, una api que principalmente está orientada a analizar y buscar información nutricional de comidas, pero que también tiene una base de recetas propia y una función para generar una lista de recetas aleatoria.
 
-Entonces se me ocurrío la idea de crear **Random Recipes**, una app que te permite generar una lista de recetas aleatorias para cuando no sabes que cocinar. Además te dá la opción de guardar las recetas que más te gusten para verlas más tarde, incluso si no tenes conexión a internet, y la posibilidad de buscar recetas filtradas por cocina internacional (como italiana o japonesa) y por dieta (como vegana o libre de gluten).
+Entonces se me ocurrío crear **Random Recipes**, una app que te permite generar una lista de recetas aleatorias para cuando no sabes que cocinar. Además te dá la opción de guardar las recetas que más te gusten para verlas más tarde, incluso si no tenes conexión a internet, y la posibilidad de buscar recetas filtradas por cocina internacional (como italiana o japonesa) y por dieta (como vegana o libre de gluten).
 
 ## Screenshots
 ![Screenshot_randomrecipes](https://user-images.githubusercontent.com/89859672/171191303-9dd712ec-5706-417c-a717-3a4834628391.jpg)
